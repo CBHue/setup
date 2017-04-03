@@ -157,4 +157,24 @@ ${color green}${upspeedgraph wlan0 20,350 0000ff ff0000 -t}
 ${color white}Download Gateway: $color${downspeedf wlan0}Kb/s
 ${color green}${downspeedgraph wlan0 20,350 0000ff ff0000 -t}
 ${endif}
+#
+# Start ra0
+${if_up ra0}
+${color green}ra0 $color ${exec iwgetid -r} 
+${color green}ra0 $color ${addr ra0}
+${color green}ra0 $color ${exec ifconfig ra0| grep ether | cut -d" " -f10 } 
+
+${color white}Upload Gateway: $color${upspeedf ra0}Kb/s
+${color green}${upspeedgraph ra0 20,350 0000ff ff0000 -t}
+${color white}Download Gateway: $color${downspeedf ra0}Kb/s
+${color green}${downspeedgraph ra0 20,350 0000ff ff0000 -t}
+${endif}
+# Start tun0
+${if_up tun0}${color green}tun0 $color ${addr tun0} ${endif}
+
+${color white}Listening TCP:
+${color green}${execi 10 netstat -anlp | grep LISTEN | grep -v ING | awk -F" " '{printf "%-5s %-15s %-15s %-15s\n", $1, $4, $5, $7}'}
+
+${color white}Listening UDP:
+${color green}${execi 10 netstat -anulp | egrep -v "udp6|Proto|\(servers|ESTABLISHED" | awk -F" " '{printf "%-5s %-15s %-15s %-15s\n", $1, $4, $5, $6}'}
 
