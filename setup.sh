@@ -12,8 +12,8 @@ RESET   = "\033[00m"      # Normal
 apt-get -qq update && apt-get -y -qq dist-upgrade --fix-missing
 
 #Wallpaper
-curl --progress -k -L "http://www.kali.org/images/wallpapers-01/kali-wp-june-2014_1920x1080_A.png" > /usr/share/wallpapers/BG.png
-gsettings set org.gnome.desktop.background picture-uri file:///usr/share/wallpapers/BG.png
+#curl --progress -k -L "http://www.kali.org/images/wallpapers-01/kali-wp-june-2014_1920x1080_A.png" > /usr/share/wallpapers/BG.png
+gsettings set org.gnome.desktop.background picture-uri file:///opt/setup/umbrella.png
 
 file=/root/.bash_aliases;
 cat <<EOF > "$file"
