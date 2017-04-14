@@ -24,6 +24,11 @@ alias src="source ~/.bashrc"
 alias msfc="service postgresql start; msfconsole"
 EOF
 
+# Install Sublime
+echo -e "\n $GREEN[+]$RESET Installing Sublime Text 3"
+curl --progress -k -L "https://download.sublimetext.com/sublime-text_build-3126_amd64.deb" > /root/Downloads/sublime-text_build-3126_amd64.deb
+dpkg -i /root/Downloads/sublime-text_build-3126_amd64.deb
+
 ##### Installing chromium
 echo -e "\n $GREEN[+]$RESET Installing chromium"
 apt-get -y -qq install chromium
