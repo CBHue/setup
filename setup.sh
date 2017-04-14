@@ -348,8 +348,9 @@ popd >/dev/null
 #git clone https://github.com/quentinhardy/odat.git /opt/odat/
 
 # reboot?
-read -p "I need to reboot ... ready ...? " -n 1 -r
-echo    # (optional) move to a new line
+echo;echo;echo;    # (optional) move to a new line
+echo -e "\n $YELLOW[+] I need to reboot ...."
+read -p "READY ... ? " -n 3 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
  reboot
