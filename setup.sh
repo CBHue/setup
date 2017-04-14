@@ -1,5 +1,9 @@
 #!/bin/bash
 
+##### Optional steps
+distupgrade=false             # Set static & lock DNS name server                              [ --distupgrade ]
+upgrade=false                 # Disable updating certain packages (e.g. Metasploit)            [ --upgrade ]
+
 ##### (Cosmetic) Colour output
 RED="\033[01;31m"      # Issues/Errors
 GREEN="\033[01;32m"    # Success
@@ -8,8 +12,31 @@ BLUE="\033[01;34m"     # Heading
 BOLD="\033[01;01m"     # Highlight
 RESET="\033[00m"       # Normal
 
-#update everything 
-apt-get -qq update && apt-get -y -qq dist-upgrade --fix-missing
+##### Read command line arguments
+for x in $( tr '[:upper:]' '[:lower:]' <<< "$@" ); do
+  if [ "${x}" == "--distupgrade" ]; then
+    distupgrade=true
+  elif [ "${x}" == "--upgrade" ]; then
+    upgrade=true
+  else
+    echo -e ' '$RED'[!]'$RESET' Unknown option: '${x} 1>&2
+    exit 1
+  fi
+done
+
+#regular update
+if [ "$upgrade" == "true" ]; then
+  apt-get -qq update && apt-get -y -qq upgrade
+else
+  echo -e ' '$RED'[!]'$RESET' Skipping apt-get upgrade ...' 1>&2
+fi
+
+#Dist Upgrade
+if [ "$dist" == "true" ]; then
+  apt-get -qq update && apt-get -y -qq dist-upgrade --fix-missing
+else
+  echo -e ' '$RED'[!]'$RESET' Skipping apt-get dist-upgrade ...' 1>&2
+fi
 
 #Wallpaper
 #curl --progress -k -L "http://www.kali.org/images/wallpapers-01/kali-wp-june-2014_1920x1080_A.png" > /usr/share/wallpapers/BG.png
