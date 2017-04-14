@@ -1,12 +1,15 @@
 #!/bin/bash
 
 ##### (Cosmetic) Colour output
-RED="\033[01;31m"      # Issues/Errors
-GREEN="\033[01;32m"    # Success
-YELLOW="\033[01;33m"   # Warnings/Information
-BLUE="\033[01;34m"     # Heading
-BOLD="\033[01;01m"     # Highlight
-RESET="\033[00m"       # Normal
+RED     = "\033[01;31m"   # Issues/Errors
+GREEN   = "\033[01;32m"   # Success
+YELLOW  = "\033[01;33m"   # Warnings/Information
+BLUE    = "\033[01;34m"   # Heading
+BOLD    = "\033[01;01m"   # Highlight
+RESET   = "\033[00m"      # Normal
+
+#update everything 
+apt-get -qq update && apt-get -y -qq dist-upgrade --fix-missing
 
 #Wallpaper
 curl --progress -k -L "http://www.kali.org/images/wallpapers-01/kali-wp-june-2014_1920x1080_A.png" > /usr/share/wallpapers/BG.png
@@ -317,3 +320,10 @@ popd >/dev/null
 #echo -e "\n $GREEN[+]$RESET Installing odat - oracle DB"
 #git clone https://github.com/quentinhardy/odat.git /opt/odat/
 
+# reboot?
+read -p "I need to reboot ... ready ...? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+ reboot
+fi
