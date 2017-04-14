@@ -255,7 +255,7 @@ popd >/dev/null
 echo -e "\n $GREEN[+]$RESET Installing HTTP screenshot"
 git clone git://github.com/breenmachine/httpscreenshot.git /opt/httpscreenshot/
 pushd /opt/httpscreenshot/ >/dev/null
-./install-dependencies.sh
+/opt/httpscreenshot/install-dependencies.sh
 popd >/dev/null
  
 #NOSQLMAP:
@@ -263,10 +263,10 @@ echo -e "\n $GREEN[+]$RESET Installing NoSQLMap"
 git clone https://github.com/tcstool/NoSQLMap.git /opt/NoSQLMap/
 
 #RANGER:
-git clone https://github.com/ranger/ranger.git /opt/ranger/
-pushd /opt/ranger/ >/dev/null
-make install
-popd >/dev/null
+git clone https://github.com/funkandwagnalls/ranger.git /opt/ranger/
+#pushd /opt/ranger/ >/dev/null
+#bash ./setup.sh
+#popd >/dev/null
 
 ##### Installing droopescan
 echo -e "\n $GREEN[+]$RESET Installing droopescan ~ Drupal vulnerability scanner"
