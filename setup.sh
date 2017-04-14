@@ -349,8 +349,8 @@ popd >/dev/null
 
 # reboot?
 echo;echo;echo;    # (optional) move to a new line
-echo -e "\n $YELLOW[+] I need to reboot ...."
-read -p "READY ... ? " -n 3 -r
+echo -e "\n $YELLOW[+] I need to reboot ....$RED"
+read -p " [!]READY ... ? " -n 3 -r
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
  reboot
