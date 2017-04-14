@@ -1,24 +1,40 @@
-cd /opt/
+#!/bin/bash
 
-#HTTPSCREENSHOT:
-git clone https://github.com/breenmachine/httpscreenshot.git
-cd /httpscreenshot/
-./install-dependencies.sh
+##### (Cosmetic) Colour output
+RED="\033[01;31m"      # Issues/Errors
+GREEN="\033[01;32m"    # Success
+YELLOW="\033[01;33m"   # Warnings/Information
+BLUE="\033[01;34m"     # Heading
+BOLD="\033[01;01m"     # Highlight
+RESET="\033[00m"       # Normal
 
-#NOSQLMAP:
-git clone https://github.com/tcstool/NoSQLMap.git
+#Wallpaper
+curl --progress -k -L "http://www.kali.org/images/wallpapers-01/kali-wp-june-2014_1920x1080_A.png" > /usr/share/wallpapers/BG.png
 
-#CMSMAP:
-git clone https://github.com/Dionach/CMSmap.git
+file=/root/.bash_aliases;
+cat <<EOF > "$file"
+alias chrome="chromium --no-sandbox --user-data-dir /tmp --password-store=basic 2>/dev/null &"
+alias chromeProxy="chromium --no-sandbox --user-data-dir /tmp --password-store=basic --proxy-server=127.0.0.1:8080 2>/dev/null &"
+alias httpServer="ifconfig; python -m SimpleHTTPServer"
+alias ftpServer="ifconfig; python -m pyftpdlib -p 21 -w"
+alias soapui="/opt/SoapUI-5.2.1/bin/soapui.sh 2>/dev/null &"
+alias pubIP="dig +short myip.opendns.com @resolver1.opendns.com"
+alias src="source ~/.bashrc"
+alias msfc="service postgresql start; msfconsole"
+EOF
 
-#RANGER:
-git clone https://github.com/ranger/ranger.git
-cd ./ranger/
-sudo make install
+##### Installing chromium
+echo -e "\n $GREEN[+]$RESET Installing chromium"
+apt-get -y -qq install chromium
 
-#CONKY:
-sudo apt-get install conky-all
+##### Installing conky
+echo -e "\n $GREEN[+]$RESET Installing conky ~ GUI desktop monitor"
+apt-get -y -qq install conky
 
+#--- Configure conky
+file=/root/.conkyrc_right; [ -e "$file" ] && cp -n $file{,.bkup}
+cat <<EOF > "$file"
+# Conky Right
 background no
 use_xft yes
 xftalpha 0.6
@@ -107,8 +123,10 @@ ${color green}${downspeedgraph tap0 20,350 0000ff ff0000 -t}${endif}
 
 #${color white}Listening UDP:
 #${color green}${execi 10 netstat -anulp | egrep -v "udp6|Proto|\(servers|ESTABLISHED" | awk -F" " '{printf "%-5s %-15s %-15s %-15s\n", $1, $4, $5, $6}'}
+EOF
 
-# Conky2
+cat <<EOF > /root/.conkyrc_left
+# Conky Left
 background no
 use_xft yes
 xftalpha 0.6
@@ -177,4 +195,99 @@ ${color green}${execi 10 netstat -anlp | grep LISTEN | grep -v ING | awk -F" " '
 
 ${color white}Listening UDP:
 ${color green}${execi 10 netstat -anulp | egrep -v "udp6|Proto|\(servers|ESTABLISHED" | awk -F" " '{printf "%-5s %-15s %-15s %-15s\n", $1, $4, $5, $6}'}
+EOF
+
+mkdir -p /root/.config/autostart/
+cat <<EOF > "/root/.config/autostart/conkyrc_right.desktop"
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/conky -c /root/.conkyrc_right
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Conky2
+Comment=<optional comment>
+EOF
+
+# Start up items
+cat <<EOF > "/root/.config/autostart/conkyrc_left.desktop"
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/conky -c /root/.conkyrc_left
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Conky2
+Comment=<optional comment>
+EOF
+
+##### Installing Python ftp
+echo -e "\n $GREEN[+]$RESET Installing Python FTPdlib"
+apt-get -y -qq install python-pyftpdlib
+
+##### Installing libreoffice
+echo -e "\n $GREEN[+]$RESET Installing libreoffice ~ GUI office suite"
+apt-get -y -qq install libreoffice
+
+##### Installing flash
+echo -e "\n $GREEN[+]$RESET Installing flash ~ multimedia web plugin"
+apt-get -y -qq install flashplugin-nonfree
+update-flashplugin-nonfree --install
+
+##### Installing veil framework
+echo -e "\n $GREEN[+]$RESET Installing veil framework ~ bypasses anti-virus"
+apt-get -y -qq install veil
+pip install symmetricjsonrpc
+touch /etc/veil/settings.py
+#/usr/share/veil-evasion/setup --silent ~ https://bugs.kali.org/view.php?id=2365
+#sed -i 's/TERMINAL_CLEAR=".*"/TERMINAL_CLEAR="false"/' /etc/veil/settings.py
+
+###### Installing shellter
+echo -e "\n $GREEN[+]$RESET Installing shellter ~ dynamic shellcode injector"
+apt-get -y -qq install shellter
+
+###### Installing the backdoor factory
+echo -e "\n $GREEN[+]$RESET Installing backdoor factory ~ bypasses anti-virus"
+apt-get -y -qq install backdoor-factory
+
+###### Installing the Backdoor Factory Proxy (BDFProxy)
+echo -e "\n $GREEN[+]$RESET Installing backdoor factory ~ patches binaries files during a MITM"
+git clone git://github.com/secretsquirrel/BDFProxy.git /opt/bdfproxy-git/
+pushd /opt/bdfproxy-git/ >/dev/null
+git pull
+popd >/dev/null
+
+##### Installing CMSmap
+echo -e "\n $GREEN[+]$RESET Installing CMSmap ~ CMS detection"
+apt-get -y -qq install git
+git clone git://github.com/Dionach/CMSmap.git /opt/cmsmap-git/
+pushd /opt/cmsmap-git/ >/dev/null
+git pull
+popd >/dev/null
+
+#HTTPSCREENSHOT:
+echo -e "\n $GREEN[+]$RESET Installing HTTP screenshot"
+git clone git://github.com/breenmachine/httpscreenshot.git /opt/httpscreenshot/
+pushd /opt/httpscreenshot/ >/dev/null
+./install-dependencies.sh
+popd >/dev/null
+ 
+#NOSQLMAP:
+echo -e "\n $GREEN[+]$RESET Installing NoSQLMap"
+git clone https://github.com/tcstool/NoSQLMap.git /opt/NoSQLMap/
+
+#RANGER:
+git clone https://github.com/ranger/ranger.git /opt/ranger/
+pushd /opt/ranger/ >/dev/null
+make install
+popd >/dev/null
+
+##### Installing droopescan
+echo -e "\n $GREEN[+]$RESET Installing droopescan ~ Drupal vulnerability scanner"
+apt-get -y -qq install git
+git clone git://github.com/droope/droopescan.git /opt/droopescan-git/
+pushd /opt/droopescan-git/ >/dev/null
+git pull
+popd >/dev/null
+
 
