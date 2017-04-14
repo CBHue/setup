@@ -32,7 +32,7 @@ echo -e "\n $GREEN[+]$RESET Installing conky ~ GUI desktop monitor"
 apt-get -y -qq install conky
 
 #--- Configure conky
-file=/root/.conkyrc_right; [ -e "$file" ] && cp -n $file{,.bkup}
+file=/root/.conkyrc_right;
 cat <<EOF > "$file"
 # Conky Right
 background no
@@ -125,7 +125,8 @@ ${color green}${downspeedgraph tap0 20,350 0000ff ff0000 -t}${endif}
 #${color green}${execi 10 netstat -anulp | egrep -v "udp6|Proto|\(servers|ESTABLISHED" | awk -F" " '{printf "%-5s %-15s %-15s %-15s\n", $1, $4, $5, $6}'}
 EOF
 
-cat <<EOF > /root/.conkyrc_left
+file=/root/.conkyrc_left;
+cat <<EOF > "$file"
 # Conky Left
 background no
 use_xft yes
