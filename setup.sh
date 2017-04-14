@@ -10,6 +10,7 @@ RESET="\033[00m"       # Normal
 
 #Wallpaper
 curl --progress -k -L "http://www.kali.org/images/wallpapers-01/kali-wp-june-2014_1920x1080_A.png" > /usr/share/wallpapers/BG.png
+gsettings set org.gnome.desktop.background picture-uri file:///usr/share/wallpapers/BG.png
 
 file=/root/.bash_aliases;
 cat <<EOF > "$file"
@@ -26,6 +27,18 @@ EOF
 ##### Installing chromium
 echo -e "\n $GREEN[+]$RESET Installing chromium"
 apt-get -y -qq install chromium
+
+##### Installing unicornscan
+echo -e "\n $GREEN[+]$RESET Installing unicornscan ~ fast port scanner"
+apt-get -y -qq install unicornscan
+
+##### Installing cmdsql
+echo -e "\n $GREEN[+]$RESET Installing cmdsql ~ (ASPX) web shell"
+apt-get -y -qq install git
+git clone git://github.com/NetSPI/cmdsql.git /opt/cmdsql-git/
+pushd /opt/cmdsql-git/ >/dev/null
+git pull
+popd >/dev/null
 
 ##### Installing conky
 echo -e "\n $GREEN[+]$RESET Installing conky ~ GUI desktop monitor"
@@ -276,4 +289,26 @@ pushd /opt/droopescan-git/ >/dev/null
 git pull
 popd >/dev/null
 
+##### Installing Discover
+echo -e "\n $GREEN[+]$RESET Installing Discover Scripts"
+git clone https://github.com/leebaird/discover.git /opt/Discover/
+pushd /opt/Discover/ >/dev/null
+git pull
+popd >/dev/null
+
+##### Installing xfree RDP
+echo -e "\n $GREEN[+]$RESET Installing xfree RDP"
+apt-get install freerdp-x11
+
+##### Installing NoSQLMap
+echo -e "\n $GREEN[+]$RESET Installing NoSQLMap"
+git clone https://github.com/tcstool/NoSQLMap.git /opt/NoSQLMap
+pushd /opt/NoSQLMap/ >/dev/null
+git pull
+python setup.py install
+popd >/dev/null
+
+##### Installing odat
+#echo -e "\n $GREEN[+]$RESET Installing odat - oracle DB"
+#git clone https://github.com/quentinhardy/odat.git /opt/odat/
 
