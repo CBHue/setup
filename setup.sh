@@ -78,6 +78,10 @@ set -g visual-activity on
 
 # Automatically set window title
 setw -g automatic-rename
+
+# Mouse mode
+setw -g mouse on
+
 EOF
 
 # Install Sublime
