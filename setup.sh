@@ -62,14 +62,14 @@ bind | split-window -h
 bind - split-window -v
 
 # Set status bar
-set -g status-bg red
+set -g status-bg black
 set -g status-fg white
 set -g status-left-length 90
 set -g status-right-length 60
 set -g window-status-current-attr bold
 set -g status-interval 60
 set -g status-justify left
-set -g status-left '#[fg=white]<!> #(ifconfig eth0 | grep netmask | cut -d" " -f10) <!> '
+set -g status-left '#[fg=white]</ #(ifconfig eth0 | grep netmask | cut -d" " -f10) > '
 set -g status-right '#[fg=blue]#S #[fg=white]%a %d %b %R ' 
 
 # Highlight active window
