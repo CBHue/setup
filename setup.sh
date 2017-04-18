@@ -54,6 +54,32 @@ alias src="source ~/.bashrc"
 alias msfc="service postgresql start; msfconsole"
 EOF
 
+file=/root/.tmux.conf;
+cat <<EOF > "$file"
+
+unbind %
+bind | split-window -h
+bind - split-window -v
+
+# Set status bar
+set -g status-bg red
+set -g status-fg white
+set -g status-left-length 90
+set -g status-right-length 60
+set -g status-justify left
+set -g status-right '#[fg=Cyan]#S #[fg=white]%a %d %b %R'
+
+# Highlight active window
+set-window-option -g window-status-current-bg black
+
+# Set window notifications
+setw -g monitor-activity on
+set -g visual-activity on
+
+# Automatically set window title
+setw -g automatic-rename
+EOF
+
 # Install Sublime
 echo -e "\n $GREEN[+]$RESET Installing Sublime Text 3"
 curl --progress -k -L "https://download.sublimetext.com/sublime-text_build-3126_amd64.deb" > /root/Downloads/sublime-text_build-3126_amd64.deb
