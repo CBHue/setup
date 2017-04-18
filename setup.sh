@@ -56,7 +56,7 @@ EOF
 
 file=/root/.tmux.conf;
 cat <<EOF > "$file"
-
+# TMUX 4 the WIN!!
 unbind %
 bind | split-window -h
 bind - split-window -v
@@ -66,21 +66,39 @@ set -g status-bg red
 set -g status-fg white
 set -g status-left-length 90
 set -g status-right-length 60
+set -g window-status-current-attr bold
+set -g status-interval 60
 set -g status-justify left
-set -g status-right '#[fg=Cyan]#S #[fg=white]%a %d %b %R'
+set -g status-left '#[fg=white]<!> #(ifconfig eth0 | grep netmask | cut -d" " -f10) <!> '
+set -g status-right '#[fg=blue]#S #[fg=white]%a %d %b %R ' 
 
 # Highlight active window
-set-window-option -g window-status-current-bg black
+set-window-option -g window-status-current-bg black 
+set-window-option -g window-status-current-fg yellow 
 
 # Set window notifications
 setw -g monitor-activity on
 set -g visual-activity on
 
 # Automatically set window title
-setw -g automatic-rename
+setw -g automatic-rename on
+set-option -g set-titles on
 
-# Mouse mode
+# Histories
+set -g history-limit 10000
+
+# Copy mode
 setw -g mouse on
+
+# Use Alt-arrow keys without prefix key to switch panes
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# Shift arrow to switch windows
+bind -n S-Left  previous-window
+bind -n S-Right next-window
 
 EOF
 
