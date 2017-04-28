@@ -38,9 +38,11 @@ else
   echo -e ' '$RED'[!]'$RESET' Skipping apt-get dist-upgrade ...' 1>&2
 fi
 
-#Wallpaper
-#curl --progress -k -L "http://www.kali.org/images/wallpapers-01/kali-wp-june-2014_1920x1080_A.png" > /usr/share/wallpapers/BG.png
-gsettings set org.gnome.desktop.background picture-uri file:///opt/setup/umbrella.png
+#Wallpaper ... Assuming you pulled the paper as well
+wPaper="$(dirname "$(readlink -f "$0")")/umbrella.png"
+if [ -f $wPaper ]; then
+  gsettings set org.gnome.desktop.background picture-uri file://${wPaper}
+fi
 
 file=/root/.bash_aliases;
 cat <<EOF > "$file"
@@ -99,14 +101,9 @@ bind -n M-Down select-pane -D
 # Shift arrow to switch windows
 bind -n S-Left  previous-window
 bind -n S-Right next-window
-
 EOF
 
-# Install Sublime
-echo -e "\n $GREEN[+]$RESET Installing Sublime Text 3"
-curl --progress -k -L "https://download.sublimetext.com/sublime-text_build-3126_amd64.deb" > /root/Downloads/sublime-text_build-3126_amd64.deb
-dpkg -i /root/Downloads/sublime-text_build-3126_amd64.deb
-
+##### APTiTUDE installs #######
 ##### Installing chromium
 echo -e "\n $GREEN[+]$RESET Installing chromium"
 apt-get -y -qq install chromium
@@ -114,14 +111,6 @@ apt-get -y -qq install chromium
 ##### Installing unicornscan
 echo -e "\n $GREEN[+]$RESET Installing unicornscan ~ fast port scanner"
 apt-get -y -qq install unicornscan
-
-##### Installing cmdsql
-echo -e "\n $GREEN[+]$RESET Installing cmdsql ~ (ASPX) web shell"
-apt-get -y -qq install git
-git clone git://github.com/NetSPI/cmdsql.git /opt/cmdsql-git/
-pushd /opt/cmdsql-git/ >/dev/null
-git pull
-popd >/dev/null
 
 ##### Installing conky
 echo -e "\n $GREEN[+]$RESET Installing conky ~ GUI desktop monitor"
@@ -316,6 +305,10 @@ echo -e "\n $GREEN[+]$RESET Installing flash ~ multimedia web plugin"
 apt-get -y -qq install flashplugin-nonfree
 update-flashplugin-nonfree --install
 
+##### Installing xfree RDP
+echo -e "\n $GREEN[+]$RESET Installing xfree RDP"
+apt-get install freerdp-x11
+
 ##### Installing veil framework
 echo -e "\n $GREEN[+]$RESET Installing veil framework ~ bypasses anti-virus"
 apt-get -y -qq install veil
@@ -331,6 +324,27 @@ apt-get -y -qq install shellter
 ###### Installing the backdoor factory
 echo -e "\n $GREEN[+]$RESET Installing backdoor factory ~ bypasses anti-virus"
 apt-get -y -qq install backdoor-factory
+
+####### dpkg installs #########
+# Install Sublime
+echo -e "\n $GREEN[+]$RESET Installing Sublime Text 3"
+package="sublime-text"
+OUT=`dpkg -l $package | grep $package | cut -d" " -f3`
+if [ "$OUT" != "$package" ]; then
+  curl --progress -k -L "https://download.sublimetext.com/sublime-text_build-3126_amd64.deb" > /root/Downloads/sublime-text_build-3126_amd64.deb
+  dpkg -i /root/Downloads/sublime-text_build-3126_amd64.deb
+fi
+
+####### git hub installs -- Install git first ##############
+apt-get -y -qq install git
+
+##### Installing cmdsql
+echo -e "\n $GREEN[+]$RESET Installing cmdsql ~ (ASPX) web shell"
+apt-get -y -qq install git
+git clone git://github.com/NetSPI/cmdsql.git /opt/cmdsql-git/
+pushd /opt/cmdsql-git/ >/dev/null
+git pull
+popd >/dev/null
 
 ###### Installing the Backdoor Factory Proxy (BDFProxy)
 echo -e "\n $GREEN[+]$RESET Installing backdoor factory ~ patches binaries files during a MITM"
@@ -366,7 +380,6 @@ git clone https://github.com/funkandwagnalls/ranger.git /opt/ranger/
 
 ##### Installing droopescan
 echo -e "\n $GREEN[+]$RESET Installing droopescan ~ Drupal vulnerability scanner"
-apt-get -y -qq install git
 git clone git://github.com/droope/droopescan.git /opt/droopescan-git/
 pushd /opt/droopescan-git/ >/dev/null
 git pull
@@ -378,10 +391,6 @@ git clone https://github.com/leebaird/discover.git /opt/Discover/
 pushd /opt/Discover/ >/dev/null
 git pull
 popd >/dev/null
-
-##### Installing xfree RDP
-echo -e "\n $GREEN[+]$RESET Installing xfree RDP"
-apt-get install freerdp-x11
 
 ##### Installing NoSQLMap
 echo -e "\n $GREEN[+]$RESET Installing NoSQLMap"
