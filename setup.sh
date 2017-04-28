@@ -296,6 +296,10 @@ EOF
 echo -e "\n $GREEN[+]$RESET Installing Python FTPdlib"
 apt-get -y -qq install python-pyftpdlib
 
+## Installing gobuster
+echo -e "\n $GREEN[+]$RESET Installing Gobuster"
+apt-get -y -qq install gobuster
+
 ##### Installing libreoffice
 echo -e "\n $GREEN[+]$RESET Installing libreoffice ~ GUI office suite"
 apt-get -y -qq install libreoffice
@@ -394,10 +398,17 @@ popd >/dev/null
 
 ##### Installing NoSQLMap
 echo -e "\n $GREEN[+]$RESET Installing NoSQLMap"
-git clone https://github.com/tcstool/NoSQLMap.git /opt/NoSQLMap
+git clone https://github.com/tcstool/NoSQLMap.git /opt/NoSQLMap/
 pushd /opt/NoSQLMap/ >/dev/null
 git pull
 python setup.py install
+popd >/dev/null
+
+### Install linEnum
+echo -e "\n $GREEN[+]$RESET Installing LinEnum"
+git clone https://github.com/rebootuser/LinEnum.git /opt/LinEnum/
+pushd /opt/LinEnum/ >/dev/null
+git pull
 popd >/dev/null
 
 ##### Installing odat
