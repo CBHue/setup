@@ -413,7 +413,14 @@ popd >/dev/null
 
 ##### Installing odat
 #echo -e "\n $GREEN[+]$RESET Installing odat - oracle DB"
-#git clone https://github.com/quentinhardy/odat.git /opt/odat/
+##git clone https://github.com/quentinhardy/odat.git /opt/odat/
+#if [ ! -d "/opt/odat" ]; then
+#  mdkir /opt/odat
+#fi
+#pushd /opt/odat/ >/dev/null
+#wget https://github.com/quentinhardy/odat/releases/download/2.2.1/odat-linux-libc2.5-i686.tar.gz
+#tar xvzf odat-linux-libc2.5-i686.tar.gz
+#popd >/dev/null
 
 # reboot?
 echo;echo;echo;    # (optional) move to a new line
