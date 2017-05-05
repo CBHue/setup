@@ -357,9 +357,17 @@ pushd /opt/bdfproxy-git/ >/dev/null
 git pull
 popd >/dev/null
 
+###### Installing Powershell Empire
+echo -e "\n $GREEN[+]$RESET Installing Powershel Empire"
+git clone https://github.com/EmpireProject/Empire.git /opt/Empire/
+pushd /opt/Empire/ >/dev/null
+git pull
+export STAGING_KEY=RANDOM
+bash /opt/Empire/setup/install.sh
+popd >/dev/null
+
 ##### Installing CMSmap
 echo -e "\n $GREEN[+]$RESET Installing CMSmap ~ CMS detection"
-apt-get -y -qq install git
 git clone git://github.com/Dionach/CMSmap.git /opt/cmsmap-git/
 pushd /opt/cmsmap-git/ >/dev/null
 git pull
@@ -369,18 +377,23 @@ popd >/dev/null
 echo -e "\n $GREEN[+]$RESET Installing HTTP screenshot"
 git clone git://github.com/breenmachine/httpscreenshot.git /opt/httpscreenshot/
 pushd /opt/httpscreenshot/ >/dev/null
+git pull
 /opt/httpscreenshot/install-dependencies.sh
 popd >/dev/null
  
 #NOSQLMAP:
 echo -e "\n $GREEN[+]$RESET Installing NoSQLMap"
 git clone https://github.com/tcstool/NoSQLMap.git /opt/NoSQLMap/
+git pull
+popd >/dev/null
 
 #RANGER:
+echo -e "\n $GREEN[+]$RESET Installing Ranger"
 git clone https://github.com/funkandwagnalls/ranger.git /opt/ranger/
-#pushd /opt/ranger/ >/dev/null
+pushd /opt/ranger/ >/dev/null
+git pull
 #bash ./setup.sh
-#popd >/dev/null
+popd >/dev/null
 
 ##### Installing droopescan
 echo -e "\n $GREEN[+]$RESET Installing droopescan ~ Drupal vulnerability scanner"
