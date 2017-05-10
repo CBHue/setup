@@ -160,11 +160,14 @@ TEXT
 \${color white}Processor \$hr
 \${color green}CPU Freq:\$color  \$freq MHz
 \${color green}CPU Usage:\$color \$cpu% \${cpubar 4}
-\${color green}Name              PID   CPU%   MEM%
-\${color green} \${top name 1} \${top pid 1} \${top cpu 1} \${top mem 1}
-\${color green} \${top name 2} \${top pid 2} \${top cpu 2} \${top mem 2}
-\${color green} \${top name 3} \${top pid 3} \${top cpu 3} \${top mem 3}
-\${color green} \${top name 4} \${top pid 4} \${top cpu 4} \${top mem 4}
+\${color green}Name                      PID   CPU%   MEM%
+\${color green} 1: \${top name 1} \${top pid 1} \${top cpu 1} \${top mem 1}
+\${color green} 2: \${top name 2} \${top pid 2} \${top cpu 2} \${top mem 2}
+\${color green} 3: \${top name 3} \${top pid 3} \${top cpu 3} \${top mem 3}
+\${color green} 4: \${top name 4} \${top pid 4} \${top cpu 4} \${top mem 4}
+\${color green} 5: \${top name 5} \${top pid 5} \${top cpu 5} \${top mem 5}
+\${color green} 6: \${top name 6} \${top pid 6} \${top cpu 6} \${top mem 6}
+\${color green} 7: \${top name 7} \${top pid 7} \${top cpu 7} \${top mem 7}
 \${color green}Processes:\$color \$processes  \${color}Running:\$color \$running_processes
 \${color white}Memory \$hr
 \${color green}\${memgraph 23,350 000000 800000 -t}
@@ -272,7 +275,7 @@ mkdir -p /root/.config/autostart/
 cat <<EOF > "/root/.config/autostart/conkyrc_right.desktop"
 [Desktop Entry]
 Type=Application
-Exec=/usr/bin/conky -c /root/.conkyrc_right
+Exec=/usr/bin/conky -q -c /root/.conkyrc_right
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
@@ -284,7 +287,7 @@ EOF
 cat <<EOF > "/root/.config/autostart/conkyrc_left.desktop"
 [Desktop Entry]
 Type=Application
-Exec=/usr/bin/conky -c /root/.conkyrc_left
+Exec=/usr/bin/conky -q -c /root/.conkyrc_left
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
