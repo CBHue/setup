@@ -112,6 +112,14 @@ apt-get -y -qq install chromium
 echo -e "\n $GREEN[+]$RESET Installing unicornscan ~ fast port scanner"
 apt-get -y -qq install unicornscan
 
+##### Installing pyftpdlib
+echo -e "\n $GREEN[+]$RESET Installing python ftpd"
+apt-get install python-pyftpdlib
+
+##### Installing pyftpdlib
+echo -e "\n $GREEN[+]$RESET Installing python ftpd"
+apt-get install python-pyftpdlib
+
 ##### Installing conky
 echo -e "\n $GREEN[+]$RESET Installing conky ~ GUI desktop monitor"
 apt-get -y -qq install conky
