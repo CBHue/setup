@@ -42,6 +42,7 @@ fi
 wPaper="$(dirname "$(readlink -f "$0")")/umbrella.png"
 if [ -f $wPaper ]; then
   gsettings set org.gnome.desktop.background picture-uri file://${wPaper}
+  gsettings set org.gnome.desktop.background picture-options "spanned"
 fi
 
 file=/root/.bash_aliases;
