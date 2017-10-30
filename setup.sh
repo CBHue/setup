@@ -105,17 +105,16 @@ bind -n S-Right next-window
 EOF
 
 ##### APTiTUDE installs #######
+echo -e "\n $GREEN[+]$RESET Apptitude updates ..."
+apt-get -qq update 
+
 ##### Installing chromium
 echo -e "\n $GREEN[+]$RESET Installing chromium"
 apt-get -y -qq install chromium
 
 ##### Installing unicornscan
-echo -e "\n $GREEN[+]$RESET Installing unicornscan ~ fast port scanner"
+echo -e "\n $GREEN[+]$RESET Installing unicornscan"
 apt-get -y -qq install unicornscan
-
-##### Installing pyftpdlib
-echo -e "\n $GREEN[+]$RESET Installing python ftpd"
-apt-get -y -qq install python-pyftpdlib
 
 ##### Installing pyftpdlib
 echo -e "\n $GREEN[+]$RESET Installing python ftpd"
@@ -304,26 +303,22 @@ Name=Conky2
 Comment=<optional comment>
 EOF
 
-##### Installing Python ftp
-echo -e "\n $GREEN[+]$RESET Installing Python FTPdlib"
-apt-get -y -qq install python-pyftpdlib
-
 ## Installing gobuster
 echo -e "\n $GREEN[+]$RESET Installing Gobuster"
 apt-get -y -qq install gobuster
 
 ##### Installing libreoffice
-echo -e "\n $GREEN[+]$RESET Installing libreoffice ~ GUI office suite"
-apt-get -y -qq install libreoffice
+echo -e "\n $GREEN[+]$RESET Installing libreoffice"
+apt-get -y install libreoffice
 
 ##### Installing flash
-echo -e "\n $GREEN[+]$RESET Installing flash ~ multimedia web plugin"
+echo -e "\n $GREEN[+]$RESET Installing flash"
 apt-get -y -qq install flashplugin-nonfree
 update-flashplugin-nonfree --install
 
 ##### Installing xfree RDP
 echo -e "\n $GREEN[+]$RESET Installing xfree RDP"
-apt-get install freerdp-x11
+apt-get -y -qq install freerdp-x11
 
 ##### Installing veil framework
 echo -e "\n $GREEN[+]$RESET Installing veil framework ~ bypasses anti-virus"
