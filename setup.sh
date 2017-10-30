@@ -115,11 +115,11 @@ apt-get -y -qq install unicornscan
 
 ##### Installing pyftpdlib
 echo -e "\n $GREEN[+]$RESET Installing python ftpd"
-apt-get install python-pyftpdlib
+apt-get -y -qq install python-pyftpdlib
 
 ##### Installing pyftpdlib
 echo -e "\n $GREEN[+]$RESET Installing python ftpd"
-apt-get install python-pyftpdlib
+apt-get -y -qq install python-pyftpdlib
 
 ##### Installing conky
 echo -e "\n $GREEN[+]$RESET Installing conky ~ GUI desktop monitor"
@@ -356,7 +356,6 @@ apt-get -y -qq install git
 
 ##### Installing cmdsql
 echo -e "\n $GREEN[+]$RESET Installing cmdsql ~ (ASPX) web shell"
-apt-get -y -qq install git
 git clone git://github.com/NetSPI/cmdsql.git /opt/cmdsql-git/
 pushd /opt/cmdsql-git/ >/dev/null
 git pull
