@@ -44,7 +44,7 @@ wPaper="$(ls $wPaperDIR |sort -R | egrep "png|jpg" |tail -1)"
 
 if [ -f $wPaper ]; then
   gsettings set org.gnome.desktop.background picture-uri file://${wPaperDIR}/${wPaper}
-  gsettings set org.gnome.desktop.background picture-options "spanned"
+  gsettings set org.gnome.desktop.background picture-options "stretched"
 fi
 
 file=/root/.bash_aliases;
