@@ -106,7 +106,7 @@ EOF
 
 ##### APTiTUDE installs #######
 echo -e "\n $GREEN[+]$RESET Apptitude updates ..."
-apt-get -qq update 
+apt-get update 
 
 ##### Installing chromium
 echo -e "\n $GREEN[+]$RESET Installing chromium"
