@@ -39,7 +39,8 @@ else
 fi
 
 #Wallpaper ... Assuming you pulled the paper as well
-wPaper="$(dirname "$(readlink -f "$0")")/umbrella.png"
+wPaperDIR="$(dirname "$(readlink -f "$0")")/"
+wPaper="$(ls $wPaperDIR |sort -R | egrep "png|jpg" |tail -1)"
 if [ -f $wPaper ]; then
   gsettings set org.gnome.desktop.background picture-uri file://${wPaper}
   gsettings set org.gnome.desktop.background picture-options "spanned"
