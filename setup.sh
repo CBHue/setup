@@ -403,6 +403,7 @@ git clone https://github.com/funkandwagnalls/ranger.git /opt/ranger/
 pushd /opt/ranger/ >/dev/null
 git pull
 bash ./setup.sh
+ln -s /usr/bin/ranger ./ranger
 popd >/dev/null
 
 ##### Installing droopescan
@@ -431,6 +432,13 @@ popd >/dev/null
 echo -e "\n $GREEN[+]$RESET Installing LinEnum"
 git clone https://github.com/rebootuser/LinEnum.git /opt/LinEnum/
 pushd /opt/LinEnum/ >/dev/null
+git pull
+popd >/dev/null
+
+### Install Session Gopher
+echo -e "\n $GREEN[+]$RESET Installing SessionGopher"
+git clone https://github.com/fireeye/SessionGopher.git /opt/SessionGopher/
+pushd /opt/SessionGopher/ >/dev/null
 git pull
 popd >/dev/null
 
