@@ -112,6 +112,10 @@ apt-get update
 echo -e "\n $GREEN[+]$RESET Installing chromium"
 apt-get -y -qq install chromium
 
+##### Installing chromium
+echo -e "\n $GREEN[+]$RESET Installing eyewitness"
+apt-get -y -qq install eyewitness
+
 ##### Installing unicornscan
 echo -e "\n $GREEN[+]$RESET Installing unicornscan"
 apt-get -y -qq install unicornscan
@@ -121,7 +125,7 @@ echo -e "\n $GREEN[+]$RESET Installing python ftpd"
 apt-get -y -qq install python-pyftpdlib
 
 ##### Installing conky
-echo -e "\n $GREEN[+]$RESET Installing conky ~ GUI desktop monitor"
+echo -e "\n $GREEN[+]$RESET Installing conky"
 apt-get -y -qq install conky
 
 #--- Configure conky
@@ -309,7 +313,7 @@ apt-get -y -qq install gobuster
 
 ##### Installing libreoffice
 echo -e "\n $GREEN[+]$RESET Installing libreoffice"
-apt-get -y install libreoffice
+apt-get -y -qq install libreoffice
 
 ##### Installing flash
 echo -e "\n $GREEN[+]$RESET Installing flash"
