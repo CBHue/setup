@@ -404,7 +404,7 @@ echo -e "\n $GREEN[+]$RESET Installing Ranger"
 git clone https://github.com/funkandwagnalls/ranger.git /opt/ranger/
 pushd /opt/ranger/ >/dev/null
 git pull
-#bash ./setup.sh
+bash ./setup.sh
 popd >/dev/null
 
 ##### Installing droopescan
