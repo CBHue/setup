@@ -114,6 +114,10 @@ apt-get update
 echo -e "\n $GREEN[+]$RESET Installing chromium"
 apt-get -y -qq install chromium
 
+##### Installing Responder
+echo -e "\n $GREEN[+]$RESET Installing Responder"
+apt-get -y -qq install responder
+
 ##### Installing chromium
 echo -e "\n $GREEN[+]$RESET Installing eyewitness"
 apt-get -y -qq install eyewitness
