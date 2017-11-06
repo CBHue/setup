@@ -45,6 +45,9 @@ wPaper="$(ls $wPaperDIR |sort -R | egrep "png|jpg" |tail -1)"
 if [ -f $wPaper ]; then
   gsettings set org.gnome.desktop.background picture-uri file://${wPaperDIR}/${wPaper}
   gsettings set org.gnome.desktop.background picture-options "stretched"
+  
+  # Need to check which desktop you are using ...
+  xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s ${wPaperDIR}/${wPaper}
 fi
 
 file=/root/.bash_aliases;
