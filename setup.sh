@@ -451,6 +451,17 @@ pushd /opt/SessionGopher/ >/dev/null
 git pull
 popd >/dev/null
 
+### Install SprayWMI
+echo -e "\n $GREEN[+]$RESET Installing SprayWMI"
+git clone https://github.com/trustedsec/spraywmi.git /opt/spraywmi/
+pushd /opt/spraywmi/ >/dev/null
+git pull
+popd >/dev/null
+
+# Note
+#If you have trouble with this on 64-bit, try: 
+#dpkg --add-architecture i386 && apt-get update && apt-get install libpam0g:i386 && apt-get install libpopt0:i386
+
 ##### Installing odat
 #echo -e "\n $GREEN[+]$RESET Installing odat - oracle DB"
 ##git clone https://github.com/quentinhardy/odat.git /opt/odat/
