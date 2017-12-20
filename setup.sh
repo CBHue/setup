@@ -133,6 +133,10 @@ apt-get -y -qq install unicornscan
 echo -e "\n $GREEN[+]$RESET Installing python ftpd"
 apt-get -y -qq install python-pyftpdlib
 
+##### Installing terminator
+echo -e "\n $GREEN[+]$RESET Installing terminator shell"
+apt-get -y -qq install terminator
+
 ##### Installing conky
 echo -e "\n $GREEN[+]$RESET Installing conky"
 apt-get -y -qq install conky
