@@ -113,6 +113,13 @@ EOF
 echo -e "\n $GREEN[+]$RESET Apptitude updates ..."
 apt-get update 
 
+##### Installing sublime
+echo -e "\n $GREEN[+]$RESET Installing sublime"
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
+apt-get install apt-transport-https
+echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
+apt-get install sublime-text
+
 ##### Installing chromium
 echo -e "\n $GREEN[+]$RESET Installing chromium"
 apt-get -y -qq install chromium
@@ -136,6 +143,10 @@ apt-get -y -qq install python-pyftpdlib
 ##### Installing terminator
 echo -e "\n $GREEN[+]$RESET Installing terminator shell"
 apt-get -y -qq install terminator
+
+##### Installing crackmapexec
+echo -e "\n $GREEN[+]$RESET Installing crackmapexec"
+apt-get install crackmapexec
 
 ##### Installing conky
 echo -e "\n $GREEN[+]$RESET Installing conky"
@@ -453,6 +464,14 @@ echo -e "\n $GREEN[+]$RESET Installing SessionGopher"
 git clone https://github.com/fireeye/SessionGopher.git /opt/SessionGopher/
 pushd /opt/SessionGopher/ >/dev/null
 git pull
+popd >/dev/null
+
+### Install Death Star
+echo -e "\n $GREEN[+]$RESET Installing Death Star"
+git clone https://github.com/byt3bl33d3r/DeathStar /opt/DeathStar
+pushd /opt/DeathStar/ >/dev/null
+# Death Star is written in Python 3
+pip3 install -r requirements.txt
 popd >/dev/null
 
 ### Install SprayWMI
