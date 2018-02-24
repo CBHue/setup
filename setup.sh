@@ -365,14 +365,14 @@ echo -e "\n $GREEN[+]$RESET Installing backdoor factory ~ bypasses anti-virus"
 apt-get -y -qq install backdoor-factory
 
 ####### dpkg installs #########
-# Install Sublime
-echo -e "\n $GREEN[+]$RESET Installing Sublime Text 3"
-package="sublime-text"
-OUT=`dpkg -l $package | grep $package | cut -d" " -f3`
-if [ "$OUT" != "$package" ]; then
-  curl --progress -k -L "https://download.sublimetext.com/sublime-text_build-3126_amd64.deb" > /root/Downloads/sublime-text_build-3126_amd64.deb
-  dpkg -i /root/Downloads/sublime-text_build-3126_amd64.deb
-fi
+## Install Sublime
+#echo -e "\n $GREEN[+]$RESET Installing Sublime Text 3"
+#package="sublime-text"
+#OUT=`dpkg -l $package | grep $package | cut -d" " -f3`
+#if [ "$OUT" != "$package" ]; then
+#  curl --progress -k -L "https://download.sublimetext.com/sublime-text_build-3126_amd64.deb" > /root/Downloads/sublime-text_build-3126_amd64.deb
+#  dpkg -i /root/Downloads/sublime-text_build-3126_amd64.deb
+#fi
 
 ####### git hub installs -- Install git first ##############
 apt-get -y -qq install git
