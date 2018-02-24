@@ -146,7 +146,7 @@ apt-get -y -qq install terminator
 
 ##### Installing crackmapexec
 echo -e "\n $GREEN[+]$RESET Installing crackmapexec"
-apt-get install crackmapexec
+apt-get -y -qq install crackmapexec
 
 ##### Installing conky
 echo -e "\n $GREEN[+]$RESET Installing conky"
