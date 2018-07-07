@@ -365,8 +365,6 @@ echo -e "\n $GREEN[+]$RESET Installing backdoor factory ~ bypasses anti-virus"
 apt-get -y -qq install backdoor-factory
 
 ####### dpkg installs #########
-## Install Sublime
-#echo -e "\n $GREEN[+]$RESET Installing Sublime Text 3"
 #package="sublime-text"
 #OUT=`dpkg -l $package | grep $package | cut -d" " -f3`
 #if [ "$OUT" != "$package" ]; then
@@ -377,12 +375,24 @@ apt-get -y -qq install backdoor-factory
 ####### git hub installs -- Install git first ##############
 apt-get -y -qq install git
 
+## Install Sublime
+echo -e "\n $GREEN[+]$RESET Installing Sublime Text 3"
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+sudo apt-get -y -qq install apt-transport-https
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+apt-get update
+sudo apt-get -y -qq install sublime-text
+
 ##### Installing cmdsql
 echo -e "\n $GREEN[+]$RESET Installing cmdsql ~ (ASPX) web shell"
 git clone git://github.com/NetSPI/cmdsql.git /opt/cmdsql-git/
 pushd /opt/cmdsql-git/ >/dev/null
 git pull
 popd >/dev/null
+
+echo -e "\n $GREEN[+]$RESET Installing prepList"
+git clone https://github.com/CBHue/prepList.git /opt/prepList/
+
 
 ###### Installing the Backdoor Factory Proxy (BDFProxy)
 echo -e "\n $GREEN[+]$RESET Installing backdoor factory ~ patches binaries files during a MITM"
@@ -485,16 +495,17 @@ popd >/dev/null
 #If you have trouble with this on 64-bit, try: 
 #dpkg --add-architecture i386 && apt-get update && apt-get install libpam0g:i386 && apt-get install libpopt0:i386
 
-##### Installing odat
-#echo -e "\n $GREEN[+]$RESET Installing odat - oracle DB"
-##git clone https://github.com/quentinhardy/odat.git /opt/odat/
-#if [ ! -d "/opt/odat" ]; then
-#  mdkir /opt/odat
-#fi
-#pushd /opt/odat/ >/dev/null
-#wget https://github.com/quentinhardy/odat/releases/download/2.2.1/odat-linux-libc2.5-i686.tar.gz
-#tar xvzf odat-linux-libc2.5-i686.tar.gz
-#popd >/dev/null
+### Installing impacket
+echo -e "\n $GREEN[+]$RESET Installing odat - oracle DB"
+git clone https://github.com/CoreSecurity/impacket.git /opt/impacket/
+pushd /opt/impacket/ >/dev/null
+git pull
+pip install .
+popd >/dev/null
+
+### Installing odat
+echo -e "\n $GREEN[+]$RESET Installing odat - oracle DB"
+git clone https://github.com/quentinhardy/odat.git /opt/odat/
 
 # reboot?
 echo;echo;echo;    # (optional) move to a new line
@@ -504,3 +515,4 @@ if [[ $REPLY =~ ^[Yy]$ ]]
 then
  reboot
 fi
+
