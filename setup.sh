@@ -278,8 +278,6 @@ short_units true
 use_spacer none
 xftfont DejaVu Sans Mono:size=10
 TEXT
-#\${color green}\$time
-#\${scroll 16 \$nodename - \$sysname \$kernel on \$machine | }
 \${color white}System \$hr
 \${color green}Hostname: \${color red}\${exec whoami} @ \$nodename
 \${color green}Kernel:   \$kernel
@@ -304,30 +302,6 @@ TEXT
 \${swapbar 4}
 \${color white}Storage \$hr
 \${color green}File systems: / \$color\${fs_used /}/\${fs_size /} \${fs_bar 6 /}
-#\${color white}Networking \$hr
-#\${color green}Public IP: \${color red}\${execi 10 dig +short myip.opendns.com @resolver1.opendns.com}
-# Start eth0
-#\${if_up eth0}\${color green}eth0 \$color \${addr eth0}
-#\${color green}eth0 \$color \${exec ifconfig | grep ether | cut -d" " -f10} 
-#\${color green}Upload Gateway: \$color\${upspeedf eth0}Kb/s
-#\${color green}\${upspeedgraph eth0 20,350 0000ff ff0000 -t}
-#\${color green}Download Gateway: \$color\${downspeedf eth0}Kb/s
-#\${color green}\${downspeedgraph eth0 20,350 0000ff ff0000 -t}\${endif}
-# End eth0
-# start eth1
-#\${if_up eth1}\${color green}eth1  \$color \${addr eth1}
-#\${color green}eth1 \$color \${endif}
-# Start tap0
-#\${if_up tap0}\${color green}tap0  \$color \${addr tap0}
-#\${color green}Upload Gateway: \$color\${upspeedf tap0}Kb/s
-#\${color green}\${upspeedgraph tap0 20,350 0000ff ff0000 -t}
-#\${color green}Download Gateway: \$color\${downspeedf tap0}Kb/s
-#\${color green}\${downspeedgraph tap0 20,350 0000ff ff0000 -t}\${endif}
-# End tap0
-#\${color white}Listening TCP:
-#\${color green}\${execi 10 netstat -anlp | grep LISTEN | grep -v ING | awk -F" " '{printf "%-5s %-15s %-15s %-15s\n", \$1, \$4, \$5, \$7}'}
-#\${color white}Listening UDP:
-#\${color green}\${execi 10 netstat -anulp | egrep -v "udp6|Proto|\(servers|ESTABLISHED" | awk -F" " '{printf "%-5s %-15s %-15s %-15s\n", \$1, \$4, \$5, \$6}'}
 EOF
 
 cat <<EOF > "/root/.conkyrc_left"
