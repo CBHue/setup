@@ -1,10 +1,20 @@
 #!/bin/bash
 
-##### Optional steps
-distupgrade=false             # Set static & lock DNS name server                              [ --distupgrade ]
-upgrade=false                 # Disable updating certain packages (e.g. Metasploit)            [ --upgrade ]
+################################################################################################################
+#
+# Kali no frils Setup Script
+# Pulls favorite apt and git tools
+#
+# Use this if you want to --upgrade
+# Use this if you want to --distupgrade 
+#
+#################################################################################################################
 
-##### (Cosmetic) Colour output
+# Optional steps
+distupgrade=false     #[ --distupgrade ]
+upgrade=false         #[ --upgrade ]
+
+# Where did i get this from ?
 RED="\033[01;31m"      # Issues/Errors
 GREEN="\033[01;32m"    # Success
 YELLOW="\033[01;33m"   # Warnings/Information
@@ -12,7 +22,7 @@ BLUE="\033[01;34m"     # Heading
 BOLD="\033[01;01m"     # Highlight
 RESET="\033[00m"       # Normal
 
-##### Read command line arguments
+# Read command line arguments
 for x in $( tr '[:upper:]' '[:lower:]' <<< "$@" ); do
   if [ "${x}" == "--distupgrade" ]; then
     distupgrade=true
@@ -24,21 +34,144 @@ for x in $( tr '[:upper:]' '[:lower:]' <<< "$@" ); do
   fi
 done
 
-#regular update
+echo -e "\n $GREEN[+]$RESET Apptitude updates ..."
+apt-get update 
+
+# regular update
 if [ "$upgrade" == "true" ]; then
-  apt-get -qq update && apt-get -y -qq upgrade
+  apt-get -y -qq upgrade
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping apt-get upgrade ...' 1>&2
+  echo -e ' '$RED'[!]'$RESET' Skipping apt-get upgrade ... [--upgrade]' 1>&2
 fi
 
-#Dist Upgrade
+# Dist Upgrade
 if [ "$dist" == "true" ]; then
-  apt-get -qq update && apt-get -y -qq dist-upgrade --fix-missing
+  apt-get -y -qq dist-upgrade --fix-missing
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping apt-get dist-upgrade ...' 1>&2
+  echo -e ' '$RED'[!]'$RESET' Skipping apt-get dist-upgrade ... [--distupgrade]' 1>&2
 fi
 
-#Wallpaper ... Assuming you pulled the paper as well
+# Sources
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
+echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
+
+# Apttitude installs
+aptLIST=( 
+	apt-transport-https
+	backdoor-factory
+	chromium
+	conky
+	crackmapexec
+	eyewitness
+	freerdp-x11
+	git
+	gobuster
+	libreoffice
+	python-pyftpdlib
+	responder
+	shellter
+	sublime-text
+	terminator
+	unicornscan
+	veil
+	virtualbox-guest-x11
+)
+
+function aptINSTALL {
+	echo -e "\n $BLUE[+]$RESET Installing $1"
+	apt-get -y -qq install $1
+}
+
+# GitHub Installs #
+easyGIT=(
+	git://github.com/breenmachine/httpscreenshot.git
+	git://github.com/Dionach/CMSmap.git
+	git://github.com/droope/droopescan.git
+	git://github.com/NetSPI/cmdsql.git
+	git://github.com/secretsquirrel/BDFProxy.git
+	https://github.com/BastilleResearch/mousejack.git
+	https://github.com/byt3bl33d3r/DeathStar
+	https://github.com/CBHue/prepList.git
+	https://github.com/Coalfire-Research/Doozer.git
+	https://github.com/Coalfire-Research/java-deserialization-exploits.git
+	https://github.com/CoreSecurity/impacket.git
+	https://github.com/danielmiessler/SecLists.git
+	https://github.com/EmpireProject/Empire.git
+	https://github.com/fireeye/SessionGopher.git
+	https://github.com/foxglovesec/JavaUnserializeExploits.git
+	https://github.com/frohoff/ysoserial.git
+	https://github.com/funkandwagnalls/ranger.git
+	https://github.com/leebaird/discover.git
+	https://github.com/quentinhardy/odat.git
+	https://github.com/quentinhardy/scriptsAndExploits.git
+	https://github.com/rebootuser/LinEnum.git
+	https://github.com/tcstool/NoSQLMap.git
+	https://github.com/trustedsec/spraywmi.git
+)
+
+function gitINSTALL {
+	echo -e "\n $GREEN[+]$RESET Installing $1"
+	a=${1%\.*}
+	b=${a##*/}
+	c=$1
+
+	# Is this a new tool?
+	if [ -d /opt/$b ]; then
+		pushd /opt/$b >/dev/null	
+		git pull
+	else
+		git clone $c /opt/$b
+		pushd /opt/$b >/dev/null	
+	fi
+
+	if [ -e requirements.txt ]; then 
+		pip -q install -r requirements.txt
+		pip3 -q install -r requirements.txt
+	fi
+
+	if [ -e setup.py ]; then 
+		pip -q install .
+	fi
+
+	popd >/dev/null
+}
+
+# LEts get our tools
+for i in ${aptLIST[@]}; do aptINSTALL $i; done
+for i in ${easyGIT[@]}; do gitINSTALL $i; done
+
+# Detailed Git Configurations #
+
+# Configure Powershell Empire
+if [ ! -d /opt/Empire/ ]; then
+	echo -e "\n $GREEN[+]$RESET Configuring Powershel Empire"
+	pushd /opt/Empire/ >/dev/null
+	git pull
+	export STAGING_KEY=RANDOM
+	bash /opt/Empire/setup/install.sh
+	popd >/dev/null
+fi 
+
+# HTTPSCREENSHOT:
+if [ ! -d /opt/httpscreenshot/ ]; then
+	echo -e "\n $GREEN[+]$RESET Configuring HTTP screenshot"
+	pushd /opt/httpscreenshot/ >/dev/null
+	git pull
+	bash /opt/httpscreenshot/install-dependencies.sh
+	popd >/dev/null
+fi
+
+# RANGER:
+if [ ! -d /opt/ranger/ ]; then
+	echo -e "\n $GREEN[+]$RESET Configuring Ranger"
+	pushd /opt/ranger/ >/dev/null
+	git pull
+	bash ./setup.sh
+	ln -s /usr/bin/ranger ./ranger
+	popd >/dev/null
+fi
+
+# Wallpaper ... Assuming you pulled the paper as well
 wPaperDIR="$(dirname "$(readlink -f "$0")")/"
 wPaper="$(ls $wPaperDIR |sort -R | egrep "png|jpg" |tail -1)"
 
@@ -47,9 +180,10 @@ if [ -f $wPaper ]; then
   gsettings set org.gnome.desktop.background picture-options "stretched"
   
   # Need to check which desktop you are using ...
-  xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s ${wPaperDIR}/${wPaper}
+  #xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s ${wPaperDIR}/${wPaper}
 fi
 
+# Lets write some config files #
 file=/root/.bash_aliases;
 cat <<EOF > "$file"
 alias chrome="chromium --no-sandbox --user-data-dir /tmp --password-store=basic 2>/dev/null &"
@@ -108,49 +242,6 @@ bind -n M-Down select-pane -D
 bind -n S-Left  previous-window
 bind -n S-Right next-window
 EOF
-
-##### APTiTUDE installs #######
-echo -e "\n $GREEN[+]$RESET Apptitude updates ..."
-apt-get update 
-
-##### Installing sublime
-echo -e "\n $GREEN[+]$RESET Installing sublime"
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
-apt-get install apt-transport-https
-echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
-apt-get install sublime-text
-
-##### Installing chromium
-echo -e "\n $GREEN[+]$RESET Installing chromium"
-apt-get -y -qq install chromium
-
-##### Installing Responder
-echo -e "\n $GREEN[+]$RESET Installing Responder"
-apt-get -y -qq install responder
-
-##### Installing chromium
-echo -e "\n $GREEN[+]$RESET Installing eyewitness"
-apt-get -y -qq install eyewitness
-
-##### Installing unicornscan
-echo -e "\n $GREEN[+]$RESET Installing unicornscan"
-apt-get -y -qq install unicornscan
-
-##### Installing pyftpdlib
-echo -e "\n $GREEN[+]$RESET Installing python ftpd"
-apt-get -y -qq install python-pyftpdlib
-
-##### Installing terminator
-echo -e "\n $GREEN[+]$RESET Installing terminator shell"
-apt-get -y -qq install terminator
-
-##### Installing crackmapexec
-echo -e "\n $GREEN[+]$RESET Installing crackmapexec"
-apt-get -y -qq install crackmapexec
-
-##### Installing conky
-echo -e "\n $GREEN[+]$RESET Installing conky"
-apt-get -y -qq install conky
 
 #--- Configure conky
 file=/root/.conkyrc_right
@@ -331,188 +422,10 @@ Name=Conky2
 Comment=<optional comment>
 EOF
 
-## Installing gobuster
-echo -e "\n $GREEN[+]$RESET Installing Gobuster"
-apt-get -y -qq install gobuster
-
-##### Installing libreoffice
-echo -e "\n $GREEN[+]$RESET Installing libreoffice"
-apt-get -y -qq install libreoffice
-
-##### Installing flash
-echo -e "\n $GREEN[+]$RESET Installing flash"
-apt-get -y -qq install flashplugin-nonfree
-update-flashplugin-nonfree --install
-
-##### Installing xfree RDP
-echo -e "\n $GREEN[+]$RESET Installing xfree RDP"
-apt-get -y -qq install freerdp-x11
-
-##### Installing veil framework
-echo -e "\n $GREEN[+]$RESET Installing veil framework ~ bypasses anti-virus"
-apt-get -y -qq install veil
-pip install symmetricjsonrpc
-touch /etc/veil/settings.py
-#/usr/share/veil-evasion/setup --silent ~ https://bugs.kali.org/view.php?id=2365
-#sed -i 's/TERMINAL_CLEAR=".*"/TERMINAL_CLEAR="false"/' /etc/veil/settings.py
-
-###### Installing shellter
-echo -e "\n $GREEN[+]$RESET Installing shellter ~ dynamic shellcode injector"
-apt-get -y -qq install shellter
-
-###### Installing the backdoor factory
-echo -e "\n $GREEN[+]$RESET Installing backdoor factory ~ bypasses anti-virus"
-apt-get -y -qq install backdoor-factory
-
-####### dpkg installs #########
-#package="sublime-text"
-#OUT=`dpkg -l $package | grep $package | cut -d" " -f3`
-#if [ "$OUT" != "$package" ]; then
-#  curl --progress -k -L "https://download.sublimetext.com/sublime-text_build-3126_amd64.deb" > /root/Downloads/sublime-text_build-3126_amd64.deb
-#  dpkg -i /root/Downloads/sublime-text_build-3126_amd64.deb
-#fi
-
-####### git hub installs -- Install git first ##############
-apt-get -y -qq install git
-
-## Install Sublime
-echo -e "\n $GREEN[+]$RESET Installing Sublime Text 3"
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-sudo apt-get -y -qq install apt-transport-https
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-apt-get update
-sudo apt-get -y -qq install sublime-text
-
-##### Installing cmdsql
-echo -e "\n $GREEN[+]$RESET Installing cmdsql ~ (ASPX) web shell"
-git clone git://github.com/NetSPI/cmdsql.git /opt/cmdsql-git/
-pushd /opt/cmdsql-git/ >/dev/null
-git pull
-popd >/dev/null
-
-echo -e "\n $GREEN[+]$RESET Installing prepList"
-git clone https://github.com/CBHue/prepList.git /opt/prepList/
-
-
-###### Installing the Backdoor Factory Proxy (BDFProxy)
-echo -e "\n $GREEN[+]$RESET Installing backdoor factory ~ patches binaries files during a MITM"
-git clone git://github.com/secretsquirrel/BDFProxy.git /opt/bdfproxy-git/
-pushd /opt/bdfproxy-git/ >/dev/null
-git pull
-popd >/dev/null
-
-###### Installing Powershell Empire
-echo -e "\n $GREEN[+]$RESET Installing Powershel Empire"
-git clone https://github.com/EmpireProject/Empire.git /opt/Empire/
-pushd /opt/Empire/ >/dev/null
-git pull
-export STAGING_KEY=RANDOM
-bash /opt/Empire/setup/install.sh
-popd >/dev/null
-
-##### Installing CMSmap
-echo -e "\n $GREEN[+]$RESET Installing CMSmap ~ CMS detection"
-git clone git://github.com/Dionach/CMSmap.git /opt/cmsmap-git/
-pushd /opt/cmsmap-git/ >/dev/null
-git pull
-popd >/dev/null
-
-#HTTPSCREENSHOT:
-echo -e "\n $GREEN[+]$RESET Installing HTTP screenshot"
-git clone git://github.com/breenmachine/httpscreenshot.git /opt/httpscreenshot/
-pushd /opt/httpscreenshot/ >/dev/null
-git pull
-/opt/httpscreenshot/install-dependencies.sh
-popd >/dev/null
- 
-#NOSQLMAP:
-echo -e "\n $GREEN[+]$RESET Installing NoSQLMap"
-git clone https://github.com/tcstool/NoSQLMap.git /opt/NoSQLMap/
-git pull
-popd >/dev/null
-
-#RANGER:
-echo -e "\n $GREEN[+]$RESET Installing Ranger"
-git clone https://github.com/funkandwagnalls/ranger.git /opt/ranger/
-pushd /opt/ranger/ >/dev/null
-git pull
-bash ./setup.sh
-ln -s /usr/bin/ranger ./ranger
-popd >/dev/null
-
-##### Installing droopescan
-echo -e "\n $GREEN[+]$RESET Installing droopescan ~ Drupal vulnerability scanner"
-git clone git://github.com/droope/droopescan.git /opt/droopescan-git/
-pushd /opt/droopescan-git/ >/dev/null
-git pull
-popd >/dev/null
-
-##### Installing Discover
-echo -e "\n $GREEN[+]$RESET Installing Discover Scripts"
-git clone https://github.com/leebaird/discover.git /opt/Discover/
-pushd /opt/Discover/ >/dev/null
-git pull
-popd >/dev/null
-
-##### Installing NoSQLMap
-echo -e "\n $GREEN[+]$RESET Installing NoSQLMap"
-git clone https://github.com/tcstool/NoSQLMap.git /opt/NoSQLMap/
-pushd /opt/NoSQLMap/ >/dev/null
-git pull
-python setup.py install
-popd >/dev/null
-
-### Install linEnum
-echo -e "\n $GREEN[+]$RESET Installing LinEnum"
-git clone https://github.com/rebootuser/LinEnum.git /opt/LinEnum/
-pushd /opt/LinEnum/ >/dev/null
-git pull
-popd >/dev/null
-
-### Install Session Gopher
-echo -e "\n $GREEN[+]$RESET Installing SessionGopher"
-git clone https://github.com/fireeye/SessionGopher.git /opt/SessionGopher/
-pushd /opt/SessionGopher/ >/dev/null
-git pull
-popd >/dev/null
-
-### Install Death Star
-echo -e "\n $GREEN[+]$RESET Installing Death Star"
-git clone https://github.com/byt3bl33d3r/DeathStar /opt/DeathStar
-pushd /opt/DeathStar/ >/dev/null
-# Death Star is written in Python 3
-pip3 install -r requirements.txt
-popd >/dev/null
-
-### Install SprayWMI
-echo -e "\n $GREEN[+]$RESET Installing SprayWMI"
-git clone https://github.com/trustedsec/spraywmi.git /opt/spraywmi/
-pushd /opt/spraywmi/ >/dev/null
-git pull
-popd >/dev/null
-
-# Note
-#If you have trouble with this on 64-bit, try: 
-#dpkg --add-architecture i386 && apt-get update && apt-get install libpam0g:i386 && apt-get install libpopt0:i386
-
-### Installing impacket
-echo -e "\n $GREEN[+]$RESET Installing odat - oracle DB"
-git clone https://github.com/CoreSecurity/impacket.git /opt/impacket/
-pushd /opt/impacket/ >/dev/null
-git pull
-pip install .
-popd >/dev/null
-
-### Installing odat
-echo -e "\n $GREEN[+]$RESET Installing odat - oracle DB"
-git clone https://github.com/quentinhardy/odat.git /opt/odat/
-
-# reboot?
-echo;echo;echo;    # (optional) move to a new line
-echo -e "\n $YELLOW[+] I need to reboot ....$RED"
+# reboot? # 
+echo;echo;echo;
+echo -e "\n $YELLOW[+] I need to reboot ....\n\n$RED"
 read -p " [!] READY ... ? " -n 3 -r
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
+if [[ $REPLY =~ ^[Yy]$ ]]; then
  reboot
 fi
-
