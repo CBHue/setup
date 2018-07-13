@@ -170,6 +170,10 @@ if [ ! -d /opt/ranger/ ]; then
 	ln -s /usr/bin/ranger ./ranger
 	popd >/dev/null
 fi
+# Pip installs
+
+echo -e "\n $GREEN[+]$RESET Installing Webdav Server"
+pip install cheroot wsgidav
 
 # Wallpaper ... Assuming you pulled the paper as well
 wPaperDIR="$(dirname "$(readlink -f "$0")")/"
