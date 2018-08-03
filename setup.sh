@@ -68,8 +68,10 @@ aptLIST=(
 	gobuster
 	libreoffice
 	python-pyftpdlib
+	realtek-rtl88xxau-dkms
 	responder
 	shellter
+	snapd
 	sublime-text
 	terminator
 	unicornscan
@@ -140,6 +142,11 @@ function gitINSTALL {
 # LEts get our tools
 for i in ${aptLIST[@]}; do aptINSTALL $i; done
 for i in ${easyGIT[@]}; do gitINSTALL $i; done
+
+# snapd installs
+systemctl enable snapd.service
+systemctl start snapd.service
+snap install powershell --classic
 
 # Detailed Git Configurations #
 
