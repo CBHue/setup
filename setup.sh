@@ -95,6 +95,7 @@ easyGIT=(
 	https://github.com/byt3bl33d3r/DeathStar
 	https://github.com/CBHue/prepList.git
 	https://github.com/CBHue/ipListER.git
+	https://github.com/CBHue/Recon-da.git
 	https://github.com/Coalfire-Research/Doozer.git
 	https://github.com/Coalfire-Research/java-deserialization-exploits.git
 	https://github.com/CoreSecurity/impacket.git
