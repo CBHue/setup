@@ -1,0 +1,8 @@
+system:password
+monitor:password
+operator:password
+system:Passw0rd
+monitor:Passw0rd
+operator:Passw0rd
+weblogic:weblogic
+weblogic:welcome1

