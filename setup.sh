@@ -36,6 +36,26 @@ for x in $( tr '[:upper:]' '[:lower:]' <<< "$@" ); do
   fi
 done
 
+# Lets write to some config files 
+################################################
+file=/root/.bash_aliases;
+cat <<EOF > "$file"
+alias chrome="chromium --no-sandbox --user-data-dir /tmp --password-store=basic 2>/dev/null &"
+alias chromeProxy="chromium --no-sandbox --user-data-dir /tmp --password-store=basic --proxy-server=127.0.0.1:8080 2>/dev/null &"
+alias httpServer="ifconfig; python -m SimpleHTTPServer"
+alias ftpServer="ifconfig; python -m pyftpdlib -p 21 -w"
+alias soapui="/opt/SoapUI-5.2.1/bin/soapui.sh 2>/dev/null &"
+alias pubIP="dig +short myip.opendns.com @resolver1.opendns.com"
+alias src="source ~/.bashrc"
+alias msfc="service postgresql start; msfconsole"
+
+# Were going to override the promt ... Should be done in profile ... but oh well
+PS1="\[\033[31m\][\[\033[36m\]\u\[\033[31m\]]\[\033[31m\]\h:\[\033[33;1m\]\w\[\033[m\] 🤬 : "
+
+EOF
+
+##################################################
+
 echo -e "\n $GREEN[+]$RESET Apptitude updates ..."
 apt-get -qq update 
 
@@ -89,10 +109,7 @@ aptLIST=(
 	virtualbox-guest-x11
 )
 
-function aptINSTALL {
-	echo -e "\n $BLUE[+]$RESET Installing $1"
-	apt-get -y -qq install $1 > /dev/null
-}
+
 
 # GitHub Installs #
 easyGIT=(
@@ -123,6 +140,67 @@ easyGIT=(
 	https://github.com/trustedsec/spraywmi.git
 )
 
+# LEts get our tools
+for i in ${aptLIST[@]}; do aptINSTALL $i; done
+for i in ${easyGIT[@]}; do gitINSTALL $i; done
+
+# snapd installs
+echo -e "\n $GREEN[+]$RESET Installing snap"
+systemctl enable snapd.service
+systemctl start snapd.service
+
+echo -e "\n $GREEN[+]$RESET Installing snap - powershell"
+snap install powershell --classic
+
+# Detailed Git Configurations #
+
+# Configure Powershell Empire
+if [ ! -d /opt/Empire/ ]; then
+	echo -e "\n $GREEN[+]$RESET Configuring Powershel Empire"
+	pushd /opt/Empire/ >/dev/null
+	git pull
+	export STAGING_KEY=RANDOM
+	bash /opt/Empire/setup/install.sh
+	popd >/dev/null
+fi 
+
+# HTTPSCREENSHOT:
+if [ ! -d /opt/httpscreenshot/ ]; then
+	echo -e "\n $GREEN[+]$RESET Configuring HTTP screenshot"
+	pushd /opt/httpscreenshot/ >/dev/null
+	git pull
+	bash /opt/httpscreenshot/install-dependencies.sh
+	popd >/dev/null
+fi
+
+# RANGER:
+if [ ! -d /opt/ranger/ ]; then
+	echo -e "\n $GREEN[+]$RESET Configuring Ranger"
+	pushd /opt/ranger/ >/dev/null
+	git pull
+	bash ./setup.sh
+	ln -s /usr/bin/ranger ./ranger
+	popd >/dev/null
+fi
+# Pip installs
+
+echo -e "\n $GREEN[+]$RESET Installing Webdav Server"
+pip install cheroot wsgidav
+
+# reboot? # 
+echo -e "\n $GREEN[+]$RESET All Done ..."
+echo;echo;echo;
+echo -e "\n $YELLOW[+] I need to reboot ....\n\n$RED"
+read -p " [!] READY ... ? " -n 3 -r
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+ reboot
+fi
+
+function aptINSTALL {
+	echo -e "\n $BLUE[+]$RESET Installing $1"
+	apt-get -y -qq install $1 > /dev/null
+}
+
 function prettyInstall {
 	# Wallpaper ... Assuming you pulled the paper as well
 	wPaperDIR="$(dirname "$(readlink -f "$0")")/"
@@ -135,24 +213,7 @@ function prettyInstall {
 	  # Need to check which desktop you are using ...
 	  #xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s ${wPaperDIR}/${wPaper}
 	fi
-
-	# Lets write some config files #
-	file=/root/.bash_aliases;
-	cat <<EOF > "$file"
-	alias chrome="chromium --no-sandbox --user-data-dir /tmp --password-store=basic 2>/dev/null &"
-	alias chromeProxy="chromium --no-sandbox --user-data-dir /tmp --password-store=basic --proxy-server=127.0.0.1:8080 2>/dev/null &"
-	alias httpServer="ifconfig; python -m SimpleHTTPServer"
-	alias ftpServer="ifconfig; python -m pyftpdlib -p 21 -w"
-	alias soapui="/opt/SoapUI-5.2.1/bin/soapui.sh 2>/dev/null &"
-	alias pubIP="dig +short myip.opendns.com @resolver1.opendns.com"
-	alias src="source ~/.bashrc"
-	alias msfc="service postgresql start; msfconsole"
-
-	# Were going to override the promt ... Should be done in profile ... but oh well
-	PS1="\[\033[31m\][\[\033[36m\]\u\[\033[31m\]]\[\033[31m\]\h:\[\033[33;1m\]\w\[\033[m\] 🤬 : "
-
-	EOF
-
+	
 	file=/root/.tmux.conf;
 	cat <<EOF > "$file"
 	# TMUX 4 the WIN!!
@@ -381,58 +442,4 @@ function gitINSTALL {
 	popd >/dev/null
 }
 
-# LEts get our tools
-for i in ${aptLIST[@]}; do aptINSTALL $i; done
-for i in ${easyGIT[@]}; do gitINSTALL $i; done
 
-# snapd installs
-echo -e "\n $GREEN[+]$RESET Installing snap"
-systemctl enable snapd.service
-systemctl start snapd.service
-
-echo -e "\n $GREEN[+]$RESET Installing snap - powershell"
-snap install powershell --classic
-
-# Detailed Git Configurations #
-
-# Configure Powershell Empire
-if [ ! -d /opt/Empire/ ]; then
-	echo -e "\n $GREEN[+]$RESET Configuring Powershel Empire"
-	pushd /opt/Empire/ >/dev/null
-	git pull
-	export STAGING_KEY=RANDOM
-	bash /opt/Empire/setup/install.sh
-	popd >/dev/null
-fi 
-
-# HTTPSCREENSHOT:
-if [ ! -d /opt/httpscreenshot/ ]; then
-	echo -e "\n $GREEN[+]$RESET Configuring HTTP screenshot"
-	pushd /opt/httpscreenshot/ >/dev/null
-	git pull
-	bash /opt/httpscreenshot/install-dependencies.sh
-	popd >/dev/null
-fi
-
-# RANGER:
-if [ ! -d /opt/ranger/ ]; then
-	echo -e "\n $GREEN[+]$RESET Configuring Ranger"
-	pushd /opt/ranger/ >/dev/null
-	git pull
-	bash ./setup.sh
-	ln -s /usr/bin/ranger ./ranger
-	popd >/dev/null
-fi
-# Pip installs
-
-echo -e "\n $GREEN[+]$RESET Installing Webdav Server"
-pip install cheroot wsgidav
-
-# reboot? # 
-echo -e "\n $GREEN[+]$RESET All Done ..."
-echo;echo;echo;
-echo -e "\n $YELLOW[+] I need to reboot ....\n\n$RED"
-read -p " [!] READY ... ? " -n 3 -r
-if [[ $REPLY =~ ^[Yy]$ ]]; then
- reboot
-fi
