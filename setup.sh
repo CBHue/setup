@@ -30,6 +30,11 @@ for x in $( tr '[:upper:]' '[:lower:]' <<< "$@" ); do
     upgrade=true
   elif [ "${x}" == "--visual" ]; then
     visual=true
+  elif [ "${x}" == "--help" ]; then
+    echo "--upgrade : apt-get upgrade"
+    echo "--dsitupgrade : apt-get dist-upgrade"
+    echo "--visual : set background and setup conky"
+    exit 1
   else
     echo -e ' '$RED'[!]'$RESET' Unknown option: '${x} 1>&2
     exit 1
