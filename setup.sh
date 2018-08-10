@@ -437,8 +437,8 @@ pip install cheroot wsgidav
 # reboot? # 
 echo -e "\n $GREEN[+]$RESET All Done ..."
 echo;echo;echo;
-echo -e "\n $YELLOW[+] I need to reboot ....\n\n$RED"
-read -p " [!] READY ... ? " -n 3 -r
+echo -e "\n $YELLOW[+] I need to reboot ... \n$RED"
+read -p " [!] READY ... ? [y]es [n]o ..." -n 3 -r
 if [[ $REPLY =~ ^[Yy]$ ]]; then
  reboot
 fi
