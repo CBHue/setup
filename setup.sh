@@ -13,6 +13,7 @@
 # Optional steps
 distupgrade=false     #[ --distupgrade ]
 upgrade=false         #[ --upgrade ]
+visual=false	      #[--visual]
 
 # Where did i get this from ?
 RED="\033[01;31m"      # Issues/Errors
@@ -21,6 +22,60 @@ YELLOW="\033[01;33m"   # Warnings/Information
 BLUE="\033[01;34m"     # Heading
 BOLD="\033[01;01m"     # Highlight
 RESET="\033[00m"       # Normal
+
+# Apttitude installs
+aptLIST=( 
+	apt-transport-https
+	backdoor-factory
+	chromium
+	conky
+	crackmapexec
+	eyewitness
+	freerdp-x11
+	git
+	gobuster
+	libreoffice
+	python3-pip
+	python-pyftpdlib
+	realtek-rtl88xxau-dkms
+	responder
+	shellter
+	snapd
+	sublime-text
+	terminator
+	unicornscan
+	veil
+	virtualbox-guest-x11
+)
+
+# GitHub Installs #
+easyGIT=(
+	git://github.com/breenmachine/httpscreenshot.git
+	git://github.com/Dionach/CMSmap.git
+	git://github.com/droope/droopescan.git
+	git://github.com/NetSPI/cmdsql.git
+	git://github.com/secretsquirrel/BDFProxy.git
+	https://github.com/BastilleResearch/mousejack.git
+	https://github.com/byt3bl33d3r/DeathStar
+	https://github.com/CBHue/prepList.git
+	https://github.com/CBHue/ipListER.git
+	https://github.com/CBHue/Recon-da.git
+	https://github.com/Coalfire-Research/Doozer.git
+	https://github.com/Coalfire-Research/java-deserialization-exploits.git
+	https://github.com/CoreSecurity/impacket.git
+	https://github.com/danielmiessler/SecLists.git
+	https://github.com/EmpireProject/Empire.git
+	https://github.com/fireeye/SessionGopher.git
+	https://github.com/foxglovesec/JavaUnserializeExploits.git
+	https://github.com/frohoff/ysoserial.git
+	https://github.com/funkandwagnalls/ranger.git
+	https://github.com/leebaird/discover.git
+	https://github.com/quentinhardy/odat.git
+	https://github.com/quentinhardy/scriptsAndExploits.git
+	https://github.com/rebootuser/LinEnum.git
+	https://github.com/tcstool/NoSQLMap.git
+	https://github.com/trustedsec/spraywmi.git
+)
 
 # Read command line arguments
 for x in $( tr '[:upper:]' '[:lower:]' <<< "$@" ); do
@@ -309,9 +364,18 @@ PS1="\[\033[31m\][\[\033[36m\]\u\[\033[31m\]]\[\033[31m\]\h:\[\033[33;1m\]\w\[\0
 EOF
 
 ##################################################
+#
+# start here
+#
+##################################################
 
+# apt update
 echo -e "\n $GREEN[+]$RESET Apptitude updates ..."
 apt-get -qq update 
+
+# Sources
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
+echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
 
 # regular update
 if [ "$upgrade" == "true" ]; then
@@ -334,79 +398,26 @@ else
   echo -e ' '$RED'[!]'$RESET' Skipping visuals ... [--visual]' 1>&2
 fi
 
-# Sources
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
-echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
-
-# Apttitude installs
-aptLIST=( 
-	apt-transport-https
-	backdoor-factory
-	chromium
-	conky
-	crackmapexec
-	eyewitness
-	freerdp-x11
-	git
-	gobuster
-	libreoffice
-	python3-pip
-	python-pyftpdlib
-	realtek-rtl88xxau-dkms
-	responder
-	shellter
-	snapd
-	sublime-text
-	terminator
-	unicornscan
-	veil
-	virtualbox-guest-x11
-)
-
-# GitHub Installs #
-easyGIT=(
-	git://github.com/breenmachine/httpscreenshot.git
-	git://github.com/Dionach/CMSmap.git
-	git://github.com/droope/droopescan.git
-	git://github.com/NetSPI/cmdsql.git
-	git://github.com/secretsquirrel/BDFProxy.git
-	https://github.com/BastilleResearch/mousejack.git
-	https://github.com/byt3bl33d3r/DeathStar
-	https://github.com/CBHue/prepList.git
-	https://github.com/CBHue/ipListER.git
-	https://github.com/CBHue/Recon-da.git
-	https://github.com/Coalfire-Research/Doozer.git
-	https://github.com/Coalfire-Research/java-deserialization-exploits.git
-	https://github.com/CoreSecurity/impacket.git
-	https://github.com/danielmiessler/SecLists.git
-	https://github.com/EmpireProject/Empire.git
-	https://github.com/fireeye/SessionGopher.git
-	https://github.com/foxglovesec/JavaUnserializeExploits.git
-	https://github.com/frohoff/ysoserial.git
-	https://github.com/funkandwagnalls/ranger.git
-	https://github.com/leebaird/discover.git
-	https://github.com/quentinhardy/odat.git
-	https://github.com/quentinhardy/scriptsAndExploits.git
-	https://github.com/rebootuser/LinEnum.git
-	https://github.com/tcstool/NoSQLMap.git
-	https://github.com/trustedsec/spraywmi.git
-)
-
 # LEts get our tools
 for i in ${aptLIST[@]}; do aptINSTALL $i; done
 for i in ${easyGIT[@]}; do gitINSTALL $i; done
 
+#
 # snapd installs
-echo -e "\n $GREEN[+]$RESET Installing snap"
+#
+echo -e "\n $GREEN[+]$RESET Configuring snap"
 systemctl enable snapd.service
 systemctl start snapd.service
 
-echo -e "\n $GREEN[+]$RESET Installing snap - powershell"
+echo -e "\n $GREEN[+]$RESET Installing powershell snap"
 snap install powershell --classic
 
+#
 # Detailed Git Configurations #
+#
 
 # Configure Powershell Empire
+# need to fix this ... it will never work the way it is ...
 if [ ! -d /opt/Empire/ ]; then
 	echo -e "\n $GREEN[+]$RESET Configuring Powershel Empire"
 	pushd /opt/Empire/ >/dev/null
@@ -434,12 +445,16 @@ if [ ! -d /opt/ranger/ ]; then
 	ln -s /usr/bin/ranger ./ranger
 	popd >/dev/null
 fi
-# Pip installs
 
+#
+# Pip installs
+#
 echo -e "\n $GREEN[+]$RESET Installing Webdav Server"
 pip install cheroot wsgidav
 
+#
 # reboot? # 
+#
 echo -e "\n $GREEN[+]$RESET All Done ..."
 echo -e "\n $YELLOW[+] I need to reboot ... \n$RED"
 read -p " [!] READY ... ? [y]es [n]o ..." -n 3 -r
