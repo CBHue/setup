@@ -37,7 +37,7 @@ for x in $( tr '[:upper:]' '[:lower:]' <<< "$@" ); do
 done
 
 echo -e "\n $GREEN[+]$RESET Apptitude updates ..."
-apt-get update 
+apt-get -qq update 
 
 # regular update
 if [ "$upgrade" == "true" ]; then
@@ -122,80 +122,6 @@ easyGIT=(
 	https://github.com/tcstool/NoSQLMap.git
 	https://github.com/trustedsec/spraywmi.git
 )
-
-function gitINSTALL {
-	echo -e "\n $GREEN[+]$RESET Installing $1"
-	a=${1%\.*}
-	b=${a##*/}
-	c=$1
-
-	# Is this a new tool?
-	if [ -d /opt/$b ]; then
-		pushd /opt/$b >/dev/null	
-		git pull
-	else
-		git clone $c /opt/$b
-		pushd /opt/$b >/dev/null	
-	fi
-
-	if [ -e requirements.txt ]; then 
-		pip -q install -r requirements.txt
-		pip3 -q install -r requirements.txt
-	fi
-
-	if [ -e setup.py ]; then 
-		pip -q install .
-	fi
-
-	popd >/dev/null
-}
-
-# LEts get our tools
-for i in ${aptLIST[@]}; do aptINSTALL $i; done
-for i in ${easyGIT[@]}; do gitINSTALL $i; done
-
-# snapd installs
-echo -e "\n $GREEN[+]$RESET Installing snap"
-systemctl enable snapd.service
-systemctl start snapd.service
-
-echo -e "\n $GREEN[+]$RESET Installing snap - powershell"
-snap install powershell --classic
-
-# Detailed Git Configurations #
-
-# Configure Powershell Empire
-if [ ! -d /opt/Empire/ ]; then
-	echo -e "\n $GREEN[+]$RESET Configuring Powershel Empire"
-	pushd /opt/Empire/ >/dev/null
-	git pull
-	export STAGING_KEY=RANDOM
-	bash /opt/Empire/setup/install.sh
-	popd >/dev/null
-fi 
-
-# HTTPSCREENSHOT:
-if [ ! -d /opt/httpscreenshot/ ]; then
-	echo -e "\n $GREEN[+]$RESET Configuring HTTP screenshot"
-	pushd /opt/httpscreenshot/ >/dev/null
-	git pull
-	bash /opt/httpscreenshot/install-dependencies.sh
-	popd >/dev/null
-fi
-
-# RANGER:
-if [ ! -d /opt/ranger/ ]; then
-	echo -e "\n $GREEN[+]$RESET Configuring Ranger"
-	pushd /opt/ranger/ >/dev/null
-	git pull
-	bash ./setup.sh
-	ln -s /usr/bin/ranger ./ranger
-	popd >/dev/null
-fi
-# Pip installs
-
-echo -e "\n $GREEN[+]$RESET Installing Webdav Server"
-pip install cheroot wsgidav
 
 function prettyInstall {
 	# Wallpaper ... Assuming you pulled the paper as well
@@ -428,7 +354,82 @@ function prettyInstall {
 	EOF
 }
 
+function gitINSTALL {
+	echo -e "\n $GREEN[+]$RESET Installing $1"
+	a=${1%\.*}
+	b=${a##*/}
+	c=$1
+
+	# Is this a new tool?
+	if [ -d /opt/$b ]; then
+		pushd /opt/$b >/dev/null	
+		git pull
+	else
+		git clone $c /opt/$b
+		pushd /opt/$b >/dev/null	
+	fi
+
+	if [ -e requirements.txt ]; then 
+		pip -q install -r requirements.txt
+		pip3 -q install -r requirements.txt
+	fi
+
+	if [ -e setup.py ]; then 
+		pip -q install .
+	fi
+
+	popd >/dev/null
+}
+
+# LEts get our tools
+for i in ${aptLIST[@]}; do aptINSTALL $i; done
+for i in ${easyGIT[@]}; do gitINSTALL $i; done
+
+# snapd installs
+echo -e "\n $GREEN[+]$RESET Installing snap"
+systemctl enable snapd.service
+systemctl start snapd.service
+
+echo -e "\n $GREEN[+]$RESET Installing snap - powershell"
+snap install powershell --classic
+
+# Detailed Git Configurations #
+
+# Configure Powershell Empire
+if [ ! -d /opt/Empire/ ]; then
+	echo -e "\n $GREEN[+]$RESET Configuring Powershel Empire"
+	pushd /opt/Empire/ >/dev/null
+	git pull
+	export STAGING_KEY=RANDOM
+	bash /opt/Empire/setup/install.sh
+	popd >/dev/null
+fi 
+
+# HTTPSCREENSHOT:
+if [ ! -d /opt/httpscreenshot/ ]; then
+	echo -e "\n $GREEN[+]$RESET Configuring HTTP screenshot"
+	pushd /opt/httpscreenshot/ >/dev/null
+	git pull
+	bash /opt/httpscreenshot/install-dependencies.sh
+	popd >/dev/null
+fi
+
+# RANGER:
+if [ ! -d /opt/ranger/ ]; then
+	echo -e "\n $GREEN[+]$RESET Configuring Ranger"
+	pushd /opt/ranger/ >/dev/null
+	git pull
+	bash ./setup.sh
+	ln -s /usr/bin/ranger ./ranger
+	popd >/dev/null
+fi
+# Pip installs
+
+echo -e "\n $GREEN[+]$RESET Installing Webdav Server"
+pip install cheroot wsgidav
+
 # reboot? # 
+echo -e "\n $GREEN[+]$RESET All Done ..."
 echo;echo;echo;
 echo -e "\n $YELLOW[+] I need to reboot ....\n\n$RED"
 read -p " [!] READY ... ? " -n 3 -r
