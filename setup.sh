@@ -155,8 +155,11 @@ for i in ${aptLIST[@]}; do aptINSTALL $i; done
 for i in ${easyGIT[@]}; do gitINSTALL $i; done
 
 # snapd installs
+echo -e "\n $GREEN[+]$RESET Installing snap"
 systemctl enable snapd.service
 systemctl start snapd.service
+
+echo -e "\n $GREEN[+]$RESET Installing snap - powershell"
 snap install powershell --classic
 
 # Detailed Git Configurations #
