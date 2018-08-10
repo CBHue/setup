@@ -55,7 +55,7 @@ fi
 
 # install background?
 if [ "$visual" == "true" ]; then
-  
+  prettyInstall
 else
   echo -e ' '$RED'[!]'$RESET' Skipping visuals ... [--visual]' 1>&2
 fi
