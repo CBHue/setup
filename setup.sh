@@ -76,6 +76,7 @@ aptLIST=(
 	git
 	gobuster
 	libreoffice
+	python3-pip
 	python-pyftpdlib
 	realtek-rtl88xxau-dkms
 	responder
