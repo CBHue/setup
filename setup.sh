@@ -90,7 +90,7 @@ aptLIST=(
 
 function aptINSTALL {
 	echo -e "\n $BLUE[+]$RESET Installing $1"
-	apt-get -y -qq install $1
+	apt-get -y -qq install $1 > /dev/null
 }
 
 # GitHub Installs #
