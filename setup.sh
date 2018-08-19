@@ -70,6 +70,7 @@ easyGIT=(
 	https://github.com/foxglovesec/JavaUnserializeExploits.git
 	https://github.com/frohoff/ysoserial.git
 	https://github.com/funkandwagnalls/ranger.git
+	https://github.com/fuzzdb-project/fuzzdb.git
 	https://github.com/leebaird/discover.git
 	https://github.com/quentinhardy/odat.git
 	https://github.com/quentinhardy/scriptsAndExploits.git
