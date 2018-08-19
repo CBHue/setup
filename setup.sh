@@ -62,6 +62,7 @@ easyGIT=(
 	https://github.com/CBHue/Recon-da.git
 	https://github.com/Coalfire-Research/Doozer.git
 	https://github.com/Coalfire-Research/java-deserialization-exploits.git
+	https://github.com/carnal0wnage/carnal0wnage-code.git
 	https://github.com/CoreSecurity/impacket.git
 	https://github.com/danielmiessler/SecLists.git
 	https://github.com/EmpireProject/Empire.git
