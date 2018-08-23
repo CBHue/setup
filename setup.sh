@@ -350,6 +350,10 @@ function gitINSTALL {
 # Lets write to some config files 
 ################################################
 file=/root/.bash_aliases;
+
+# maybe a file merge here?
+#if [ ! -f $file ]; then
+
 cat <<EOF > "$file"
 alias chrome="chromium --no-sandbox --user-data-dir /tmp --password-store=basic 2>/dev/null &"
 alias chromeProxy="chromium --no-sandbox --user-data-dir /tmp --password-store=basic --proxy-server=127.0.0.1:8080 2>/dev/null &"
@@ -364,6 +368,7 @@ alias msfc="service postgresql start; msfconsole"
 PS1="\[\033[31m\][\[\033[36m\]\u\[\033[31m\]]\[\033[31m\]\h:\[\033[33;1m\]\w\[\033[m\] : "
 
 EOF
+#fi
 
 ##################################################
 #
