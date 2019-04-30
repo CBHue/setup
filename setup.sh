@@ -23,63 +23,32 @@ BLUE="\033[01;34m"     # Heading
 BOLD="\033[01;01m"     # Highlight
 RESET="\033[00m"       # Normal
 
-# Apttitude installs - list your apt favorites here
+# Apttitude installs
 aptLIST=()
+apt="/opt/setup/apt.lst"
 
-aptLIST=( 
-	apt-transport-https
-	backdoor-factory
-	chromium
-	conky
-	crackmapexec
-	eyewitness
-	freerdp-x11
-	git
-	gobuster
-	libreoffice
-	python3-pip
-	python-pyftpdlib
-	realtek-rtl88xxau-dkms
-	responder
-	shellter
-	snapd
-	sublime-text
-	terminator
-	unicornscan
-	veil
-	virtualbox-guest-x11
-)
+if [[ -f "$apt" ]]; then
+	while IFS= read -r line 
+	do
+		if [[ $line == \#* ]]; then
+			continue
+		fi
+		aptLIST+=($line)
+	done <"$apt"
+fi
 
 # GitHub Installs #
-easyGIT=(
-	git://github.com/breenmachine/httpscreenshot.git
-	git://github.com/Dionach/CMSmap.git
-	git://github.com/droope/droopescan.git
-	git://github.com/NetSPI/cmdsql.git
-	git://github.com/secretsquirrel/BDFProxy.git
-	https://github.com/BastilleResearch/mousejack.git
-	https://github.com/byt3bl33d3r/DeathStar
-	https://github.com/CBHue/prepList.git
-	https://github.com/CBHue/ipListER.git
-	https://github.com/CBHue/Recon-da.git
-	https://github.com/Coalfire-Research/Doozer.git
-	https://github.com/Coalfire-Research/java-deserialization-exploits.git
-	https://github.com/carnal0wnage/carnal0wnage-code.git
-	https://github.com/CoreSecurity/impacket.git
-	https://github.com/danielmiessler/SecLists.git
-	https://github.com/EmpireProject/Empire.git
-	https://github.com/fireeye/SessionGopher.git
-	https://github.com/foxglovesec/JavaUnserializeExploits.git
-	https://github.com/frohoff/ysoserial.git
-	https://github.com/funkandwagnalls/ranger.git
-	https://github.com/fuzzdb-project/fuzzdb.git
-	https://github.com/leebaird/discover.git
-	https://github.com/quentinhardy/odat.git
-	https://github.com/quentinhardy/scriptsAndExploits.git
-	https://github.com/rebootuser/LinEnum.git
-	https://github.com/tcstool/NoSQLMap.git
-	https://github.com/trustedsec/spraywmi.git
-)
+git="/opt/setup/git.lst"
+easyGIT=()
+if [[ -f "$git" ]]; then
+	while IFS= read -r line 
+	do
+		if [[ $line == \#* ]]; then
+			continue
+		fi
+		easyGIT+=($line)
+	done <"$git"
+fi
 
 # Read command line arguments
 for x in $( tr '[:upper:]' '[:lower:]' <<< "$@" ); do
@@ -114,11 +83,13 @@ function prettyInstall {
 	wPaper="$(ls $wPaperDIR |sort -R | egrep "png|jpg" |tail -1)"
 
 	if [ -f $wPaper ]; then
-	  gsettings set org.gnome.desktop.background picture-uri file://${wPaperDIR}/${wPaper}
-	  gsettings set org.gnome.desktop.background picture-options "stretched"
-
-	  # Need to check which desktop you are using ...
-	  #xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s ${wPaperDIR}/${wPaper}
+		if [[ $XDG_CURRENT_DESKTOP == "GNOME" ]]; do
+			gsettings set org.gnome.desktop.background picture-uri file://${wPaperDIR}/${wPaper}
+			gsettings set org.gnome.desktop.background picture-options "stretched"
+		fi
+		if [[ $XDG_CURRENT_DESKTOP == "XFCE" ]]; do
+			xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s ${wPaperDIR}/${wPaper}
+		fi
 	fi
 	
 	file=/root/.tmux.conf;
