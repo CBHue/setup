@@ -23,7 +23,7 @@ BLUE="\033[01;34m"     # Heading
 BOLD="\033[01;01m"     # Highlight
 RESET="\033[00m"       # Normal
 
-# Apttitude installs
+# Apttitude installs - list your apt favorites here
 aptLIST=( 
 	apt-transport-https
 	backdoor-factory
