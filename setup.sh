@@ -79,12 +79,12 @@ function aptINSTALL {
 
 function prettyInstall {
 	# Wallpaper ... Assuming you pulled the paper as well
-	wPaperDIR="$(dirname "$(readlink -f "$0")")/"
+	wPaperDIR="$(dirname "$(readlink -f "$0")")/BG/"
 	wPaper="$(ls $wPaperDIR |sort -R | egrep "png|jpg" |tail -1)"
 
 	if [ -f $wPaper ]; then
 		if [[ $XDG_CURRENT_DESKTOP == "GNOME" ]]; do
-			gsettings set org.gnome.desktop.background picture-uri file://${wPaperDIR}/${wPaper}
+			gsettings set org.gnome.desktop.background picture-uri file://${wPaperDIR}${wPaper}
 			gsettings set org.gnome.desktop.background picture-options "stretched"
 		fi
 		if [[ $XDG_CURRENT_DESKTOP == "XFCE" ]]; do
