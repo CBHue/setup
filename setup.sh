@@ -277,16 +277,18 @@ mkdir -p /root/.config/autostart/
 cat <<EOF > "/root/.config/autostart/conkyrc_right.desktop"
 [Desktop Entry]
 Type=Application
-Exec=sh -c \"sleep 10; /usr/bin/conky -q -c /root/.conkyrc_right;\"
+Exec=conky --daemonize --pause=5 --quiet --config=/root/.conky_right
 Name=Conky-right
 Comment=<optional comment>
+StartupNotify=false
+Terminal=false
 EOF
 
 	# Start up items
 	cat <<EOF > "/root/.config/autostart/conkyrc_left.desktop"
 [Desktop Entry]
 Type=Application
-Exec=sh -c \"sleep 10; /usr/bin/conky -q -c /root/.conkyrc_left;\"
+Exec=conky --daemonize --pause=5 --quiet --config=/root/.conky_left
 Name=Conky-left
 Comment=<optional comment>
 EOF
