@@ -88,6 +88,11 @@ function prettyInstall {
 			gsettings set org.gnome.desktop.background picture-options "stretched"
 		fi
 		if [[ $XDG_CURRENT_DESKTOP == "XFCE" ]]; do
+			# Move panel-1 to the bottom
+			xfconf-query --channel 'xfce4-panel' --property '/panels/panel-1/position' --set "p=8;x=0;y=0"
+			# Move panel-2 top left
+			xfconf-query --channel 'xfce4-panel' --property '/panels/panel-2/position' --set "p=0;x=0;y=0"
+			# Reset Background
 			xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s ${wPaperDIR}/${wPaper}
 		fi
 	fi
@@ -272,11 +277,8 @@ mkdir -p /root/.config/autostart/
 cat <<EOF > "/root/.config/autostart/conkyrc_right.desktop"
 [Desktop Entry]
 Type=Application
-Exec=/usr/bin/conky -q -c /root/.conkyrc_right
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name=Conky2
+Exec=sh -c \"sleep 10; /usr/bin/conky -q -c /root/.conkyrc_right;\"
+Name=Conky-right
 Comment=<optional comment>
 EOF
 
@@ -284,11 +286,8 @@ EOF
 	cat <<EOF > "/root/.config/autostart/conkyrc_left.desktop"
 [Desktop Entry]
 Type=Application
-Exec=/usr/bin/conky -q -c /root/.conkyrc_left
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name=Conky2
+Exec=sh -c \"sleep 10; /usr/bin/conky -q -c /root/.conkyrc_left;\"
+Name=Conky-left
 Comment=<optional comment>
 EOF
 }
