@@ -1,0 +1,29 @@
+#
+# These are the git tools we want to install
+#
+git://github.com/breenmachine/httpscreenshot.git
+git://github.com/Dionach/CMSmap.git
+git://github.com/droope/droopescan.git
+git://github.com/NetSPI/cmdsql.git
+git://github.com/secretsquirrel/BDFProxy.git
+https://github.com/BastilleResearch/mousejack.git
+https://github.com/byt3bl33d3r/DeathStar
+https://github.com/CBHue/prepList.git
+https://github.com/CBHue/ipListER.git
+https://github.com/CBHue/Recon-da.git
+https://github.com/Coalfire-Research/Doozer.git
+https://github.com/Coalfire-Research/java-deserialization-exploits.git
+https://github.com/CoreSecurity/impacket.git
+https://github.com/danielmiessler/SecLists.git
+https://github.com/EmpireProject/Empire.git
+https://github.com/fireeye/SessionGopher.git
+https://github.com/foxglovesec/JavaUnserializeExploits.git
+https://github.com/frohoff/ysoserial.git
+https://github.com/funkandwagnalls/ranger.git
+https://github.com/leebaird/discover.git
+https://github.com/quentinhardy/odat.git
+https://github.com/quentinhardy/scriptsAndExploits.git
+https://github.com/rebootuser/LinEnum.git
+https://github.com/tcstool/NoSQLMap.git
+https://github.com/trustedsec/spraywmi.git
+# This is the end

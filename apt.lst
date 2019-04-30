@@ -1,0 +1,25 @@
+#
+# This is a list of apt-get tools 
+# 
+apt-transport-https
+backdoor-factory
+chromium
+conky
+crackmapexec
+eyewitness
+freerdp-x11
+git
+gobuster
+libreoffice
+python3-pip
+python-pyftpdlib
+realtek-rtl88xxau-dkms
+responder
+shellter
+snapd
+sublime-text
+terminator
+unicornscan
+veil
+virtualbox-guest-x11
+# Not sure why i need this
