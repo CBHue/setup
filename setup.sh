@@ -52,21 +52,32 @@ fi
 
 # Read command line arguments
 for x in $( tr '[:upper:]' '[:lower:]' <<< "$@" ); do
-  if [ "${x}" == "--distupgrade" ]; then
-    distupgrade=true
-  elif [ "${x}" == "--upgrade" ]; then
-    upgrade=true
-  elif [ "${x}" == "--visual" ]; then
-    visual=true
-  elif [ "${x}" == "--help" ]; then
-    echo "--upgrade : apt-get upgrade"
-    echo "--dsitupgrade : apt-get dist-upgrade"
-    echo "--visual : set background and setup conky"
-    exit 1
-  else
-    echo -e ' '$RED'[!]'$RESET' Unknown option: '${x} 1>&2
-    exit 1
-  fi
+	if [ "${x}" == "--distupgrade" ]; then
+		distupgrade=true
+	elif [ "${x}" == "--upgrade" ]; then
+		upgrade=true
+	elif [ "${x}" == "--visual" ]; then
+		visual=true
+	elif [ "${x}" == "--apt" ]; then
+		apttitude=true
+	elif [ "${x}" == "--git" ]; then
+		gitHub=true
+	elif [ "${x}" == "--apt" ]; then
+		snapd=true
+	elif [ "${x}" == "--apt" ]; then
+		pip=true
+	elif [ "${x}" == "--help" ]; then
+		echo "--upgrade : apt-get upgrade"
+		echo "--dsitupgrade : apt-get dist-upgrade"
+		echo "--apttitude : apt Tools"
+		echo "--snapd : snapd Tools"
+		echo "--pip : Python Tools"
+		echo "--gitHub : GitHub Tools"
+		exit 1
+	else
+		echo -e ' '$RED'[!]'$RESET' Unknown option: '${x} 1>&2
+		exit 1
+	fi
 done
 
 #
@@ -78,16 +89,38 @@ function aptINSTALL {
 }
 
 function prettyInstall {
+	# Lets write to some config files 
+	################################################
+	file=$HOME/.bash_aliases;
+
+	# maybe a file merge here?
+	#if [ ! -f $file ]; then
+
+	cat <<EOF > "$file"
+alias chrome="chromium --no-sandbox --user-data-dir /tmp --password-store=basic 2>/dev/null &"
+alias chromeProxy="chromium --no-sandbox --user-data-dir /tmp --password-store=basic --proxy-server=127.0.0.1:8080 2>/dev/null &"
+alias httpServer="ifconfig; python -m SimpleHTTPServer"
+alias ftpServer="ifconfig; python -m pyftpdlib -p 21 -w"
+alias soapui="/opt/SoapUI-5.2.1/bin/soapui.sh 2>/dev/null &"
+alias pubIP="dig +short myip.opendns.com @resolver1.opendns.com"
+alias src="source ~/.bashrc"
+alias msfc="service postgresql start; msfconsole"
+
+# Were going to override the promt ... Should be done in profile ... but oh well
+PS1="\[\033[31m\][\[\033[36m\]\u\[\033[31m\]]\[\033[31m\]\h:\[\033[33;1m\]\w\[\033[m\] : "
+
+EOF
+#fi
 	# Wallpaper ... Assuming you pulled the paper as well
 	wPaperDIR="$(dirname "$(readlink -f "$0")")/BG/"
 	wPaper="$(ls $wPaperDIR |sort -R | egrep "png|jpg" |tail -1)"
 
 	if [ -f $wPaper ]; then
-		if [[ $XDG_CURRENT_DESKTOP == "GNOME" ]]; do
+		if [[ "$XDG_CURRENT_DESKTOP" == "GNOME" ]]; then
 			gsettings set org.gnome.desktop.background picture-uri file://${wPaperDIR}${wPaper}
 			gsettings set org.gnome.desktop.background picture-options "stretched"
 		fi
-		if [[ $XDG_CURRENT_DESKTOP == "XFCE" ]]; do
+		if [[ "$XDG_CURRENT_DESKTOP" == "XFCE" ]]; then
 			# Move panel-1 to the bottom
 			xfconf-query --channel 'xfce4-panel' --property '/panels/panel-1/position' --set "p=8;x=0;y=0"
 			# Move panel-2 top left
@@ -97,201 +130,29 @@ function prettyInstall {
 		fi
 	fi
 	
-	file=/root/.tmux.conf;
-	cat <<EOF > "$file"
-# TMUX 4 the WIN!!
-unbind %
-bind | split-window -h
-bind - split-window -v
-
-# Set status bar
-set -g status-bg black
-set -g status-fg white
-set -g status-left-length 90
-set -g status-right-length 60
-set -g window-status-current-attr bold
-set -g status-interval 60
-set -g status-justify left
-set -g status-left '#[fg=white]</ #(ifconfig eth0 | grep netmask | cut -d" " -f10) > '
-set -g status-right '#[fg=blue]#S #[fg=white]%a %d %b %R ' 
-
-# Highlight active window
-set-window-option -g window-status-current-bg black 
-set-window-option -g window-status-current-fg yellow 
-
-# Set window notifications
-setw -g monitor-activity on
-set -g visual-activity on
-
-# Automatically set window title
-setw -g automatic-rename on
-set-option -g set-titles on
-
-# Histories
-set -g history-limit 10000
-
-# Copy mode
-setw -g mouse on
-
-# Use Alt-arrow keys without prefix key to switch panes
-bind -n M-Left select-pane -L
-bind -n M-Right select-pane -R
-bind -n M-Up select-pane -U
-bind -n M-Down select-pane -D
-
-# Shift arrow to switch windows
-bind -n S-Left  previous-window
-bind -n S-Right next-window
-EOF
-
-	#--- Configure conky
-	file=/root/.conkyrc_right
-	cat <<EOF > "/root/.conkyrc_right"
-# Conky Right
-background no
-use_xft yes
-xftalpha 0.6
-own_window true
-own_window_type desktop
-own_window_argb_visual true
-# 0 = transparent, 255 = solid
-own_window_argb_value 160 
-double_buffer yes
-update_interval 1
-#maximum_width 400
-alignment top_right
-#gap_x 50
-gap_y 110
-no_buffers yes
-uppercase no
-cpu_avg_samples 5
-net_avg_samples 5
-diskio_avg_samples 5
-if_up_strictness address
-draw_shades no
-draw_outline no
-draw_borders no
-draw_graph_borders yes
-default_color lightgray
-default_shade_color red
-default_outline_color green
-short_units true
-use_spacer none
-xftfont DejaVu Sans Mono:size=10
-TEXT
-\${color white}System \$hr
-\${color green}Hostname: \${color red}\${exec whoami} @ \$nodename
-\${color green}Kernel:   \$kernel
-\${color green}Uptime:\$color   \$uptime
-\${color white}Processor \$hr
-\${color green}CPU Freq:\$color  \$freq MHz
-\${color green}CPU Usage:\$color \$cpu% \${cpubar 4}
-\${color green}Name                      PID   CPU%   MEM%
-\${color green} 1: \${top name 1} \${top pid 1} \${top cpu 1} \${top mem 1}
-\${color green} 2: \${top name 2} \${top pid 2} \${top cpu 2} \${top mem 2}
-\${color green} 3: \${top name 3} \${top pid 3} \${top cpu 3} \${top mem 3}
-\${color green} 4: \${top name 4} \${top pid 4} \${top cpu 4} \${top mem 4}
-\${color green} 5: \${top name 5} \${top pid 5} \${top cpu 5} \${top mem 5}
-\${color green} 6: \${top name 6} \${top pid 6} \${top cpu 6} \${top mem 6}
-\${color green} 7: \${top name 7} \${top pid 7} \${top cpu 7} \${top mem 7}
-\${color green}Processes:\$color \$processes  \${color}Running:\$color \$running_processes
-\${color white}Memory \$hr
-\${color green}\${memgraph 23,350 000000 800000 -t}
-\${color green}RAM Usage:\$color  \$mem/\$memmax - \$memperc% 
-\${membar 4}
-\${color green}Swap Usage:\$color \$swap/\$swapmax - \$swapperc% 
-\${swapbar 4}
-\${color white}Storage \$hr
-\${color green}File systems: / \$color\${fs_used /}/\${fs_size /} \${fs_bar 6 /}
-EOF
-
-	cat <<EOF > "/root/.conkyrc_left"
-# Conky Left
-background no
-use_xft yes
-xftalpha 0.6
-own_window true
-own_window_type desktop
-own_window_argb_visual true
-# 0 = transparent, 255 = solid
-own_window_argb_value 160 
-double_buffer yes
-update_interval 1
-#maximum_width 400
-alignment top_left
-gap_x 60
-gap_y 110
-no_buffers yes
-uppercase no
-cpu_avg_samples 5
-net_avg_samples 5
-diskio_avg_samples 5
-if_up_strictness address
-draw_shades no
-draw_outline no
-draw_borders no
-draw_graph_borders yes
-default_color lightgray
-default_shade_color red
-default_outline_color green
-short_units true
-use_spacer none
-xftfont DejaVu Sans Mono:size=10
-TEXT
-\${color white}Networking \$hr
-# Start eth0
-\${if_up eth0}\${color green}eth0 \$color \${addr eth0}
-\${color green}eth0 \$color \${exec ifconfig eth0| grep ether | cut -d" " -f10 } \${endif}
-#
-# Start wlan0
-\${if_up wlan0}
-\${color green}wlan0 \$color \${exec iwgetid -r} 
-\${color green}wlan0 \$color \${addr wlan0}
-\${color green}wlan0 \$color \${exec ifconfig wlan0| grep ether | cut -d" " -f10 } 
-#
-\${color white}Upload Gateway: \$color\${upspeedf wlan0}Kb/s
-\${color green}\${upspeedgraph wlan0 20,350 0000ff ff0000 -t}
-\${color white}Download Gateway: \$color\${downspeedf wlan0}Kb/s
-\${color green}\${downspeedgraph wlan0 20,350 0000ff ff0000 -t}
-\${endif}
-#
-# Start ra0
-\${if_up ra0}
-\${color green}ra0 \$color \${exec iwgetid -r} 
-\${color green}ra0 \$color \${addr ra0}
-\${color green}ra0 \$color \${exec ifconfig ra0| grep ether | cut -d" " -f10 } 
-\${color white}Upload Gateway: \$color\${upspeedf ra0}Kb/s
-\${color green}\${upspeedgraph ra0 20,350 0000ff ff0000 -t}
-\${color white}Download Gateway: \$color\${downspeedf ra0}Kb/s
-\${color green}\${downspeedgraph ra0 20,350 0000ff ff0000 -t}
-\${endif}
-# Start tun0
-\${if_up tun0}\${color green}tun0 \$color \${addr tun0} \${endif}
-\${color white}Listening TCP:
-\${color green}\${execi 10 netstat -anlp | grep LISTEN | grep -v ING | awk -F" " '{printf "%-5s %-15s %-15s %-15s\n", \$1, \$4, \$5, \$7}'}
-\${color white}Listening UDP:
-\${color green}\${execi 10 netstat -anulp | egrep -v "udp6|Proto|\(servers|ESTABLISHED" | awk -F" " '{printf "%-5s %-15s %-15s %-15s\n", \$1, \$4, \$5, \$6}'}
-EOF
-
-mkdir -p /root/.config/autostart/
-cat <<EOF > "/root/.config/autostart/conkyrc_right.desktop"
-[Desktop Entry]
-Type=Application
-Exec=conky --daemonize --pause=5 --quiet --config=/root/.conky_right
-Name=Conky-right
-Comment=<optional comment>
-StartupNotify=false
-Terminal=false
-EOF
+	# Move conky.conf to the users home dir
+	cp "$(dirname "$(readlink -f "$0")")/conky_right.conf" "$HOME/.conky_right.conf" 
+	cp "$(dirname "$(readlink -f "$0")")/conky_left.conf" "$HOME/.conky_left.conf" 
 
 	# Start up items
-	cat <<EOF > "/root/.config/autostart/conkyrc_left.desktop"
+	mkdir -p $HOME/.config/autostart/
+
+	cat <<EOF > "$HOME/.config/autostart/conkyrc_right.desktop"
 [Desktop Entry]
 Type=Application
-Exec=conky --daemonize --pause=5 --quiet --config=/root/.conky_left
+Exec=conky --daemonize --pause=5 --quiet --config=$HOME/.conky_right.conf
+Name=Conky-right
+Comment=<optional comment>
+EOF
+
+	cat <<EOF > "$HOME/.config/autostart/conkyrc_left.desktop"
+[Desktop Entry]
+Type=Application
+Exec=conky --daemonize --pause=6 --quiet --config=$HOME/.conky_left.conf
 Name=Conky-left
 Comment=<optional comment>
 EOF
+
 }
 
 function gitINSTALL {
@@ -321,43 +182,11 @@ function gitINSTALL {
 	popd >/dev/null
 }
 
-# Lets write to some config files 
-################################################
-file=/root/.bash_aliases;
-
-# maybe a file merge here?
-#if [ ! -f $file ]; then
-
-cat <<EOF > "$file"
-alias chrome="chromium --no-sandbox --user-data-dir /tmp --password-store=basic 2>/dev/null &"
-alias chromeProxy="chromium --no-sandbox --user-data-dir /tmp --password-store=basic --proxy-server=127.0.0.1:8080 2>/dev/null &"
-alias httpServer="ifconfig; python -m SimpleHTTPServer"
-alias ftpServer="ifconfig; python -m pyftpdlib -p 21 -w"
-alias soapui="/opt/SoapUI-5.2.1/bin/soapui.sh 2>/dev/null &"
-alias pubIP="dig +short myip.opendns.com @resolver1.opendns.com"
-alias src="source ~/.bashrc"
-alias msfc="service postgresql start; msfconsole"
-
-# Were going to override the promt ... Should be done in profile ... but oh well
-PS1="\[\033[31m\][\[\033[36m\]\u\[\033[31m\]]\[\033[31m\]\h:\[\033[33;1m\]\w\[\033[m\] : "
-
-EOF
-#fi
-
 ##################################################
 #
 # start here
 #
 ##################################################
-
-# apt update
-echo -e "\n $GREEN[+]$RESET Apptitude updates ..."
-apt-get -qq update 
-
-# Sources
-echo -e "\n $GREEN[+]$RESET Sublime key ..."
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
-echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
 
 # regular update
 if [ "$upgrade" == "true" ]; then
@@ -381,59 +210,74 @@ else
 fi
 
 # LEts get our tools
-for i in ${aptLIST[@]}; do aptINSTALL $i; done
-for i in ${easyGIT[@]}; do gitINSTALL $i; done
+if [ "$apptitude" == "true" ]; then
+	# apt update
+	echo -e "\n $GREEN[+]$RESET Apptitude updates ..."
+	apt-get -qq update 
+
+	# Sources
+	echo -e "\n $GREEN[+]$RESET Sublime key ..."
+	wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
+	echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
+
+	for i in ${aptLIST[@]}; do aptINSTALL $i; done
+else
+  echo -e ' '$RED'[!]'$RESET' Skipping Apptitude ... [--visual]' 1>&2
+fi
 
 #
 # snapd installs
 #
-echo -e "\n $GREEN[+]$RESET Configuring snap"
-systemctl enable snapd.service
-systemctl start snapd.service
+if [ "snapd" == "true" ]; then
+	echo -e "\n $GREEN[+]$RESET Configuring snap"
+	systemctl enable snapd.service
+	systemctl start snapd.service
 
-echo -e "\n $GREEN[+]$RESET Installing powershell snap"
-snap install powershell --classic
-
+	echo -e "\n $GREEN[+]$RESET Installing powershell snap"
+	snap install powershell --classic
+else
+  echo -e ' '$RED'[!]'$RESET' Skipping snapd ... [--visual]' 1>&2
+fi
 #
 # Detailed Git Configurations #
 #
 
-# Configure Powershell Empire
-# need to fix this ... it will never work the way it is ...
-if [ ! -d /opt/Empire/ ]; then
-	echo -e "\n $GREEN[+]$RESET Configuring Powershel Empire"
-	pushd /opt/Empire/ >/dev/null
-	git pull
-	export STAGING_KEY=RANDOM
-	bash /opt/Empire/setup/install.sh
-	popd >/dev/null
-fi 
+if [ "$gitHub" == "true" ]; then
+	for i in ${easyGIT[@]}; do gitINSTALL $i; done
 
-# HTTPSCREENSHOT:
-if [ ! -d /opt/httpscreenshot/ ]; then
-	echo -e "\n $GREEN[+]$RESET Configuring HTTP screenshot"
-	pushd /opt/httpscreenshot/ >/dev/null
-	git pull
-	bash /opt/httpscreenshot/install-dependencies.sh
-	popd >/dev/null
-fi
+	# Configure Powershell Empire
+	# need to fix this ... it will never work the way it is ...
+	if [ ! -d /opt/Empire/ ]; then
+		echo -e "\n $GREEN[+]$RESET Configuring Powershel Empire"
+		pushd /opt/Empire/ >/dev/null
+		git pull
+		export STAGING_KEY=RANDOM
+		bash /opt/Empire/setup/install.sh
+		popd >/dev/null
+	fi 
 
-# RANGER:
-if [ ! -d /opt/ranger/ ]; then
-	echo -e "\n $GREEN[+]$RESET Configuring Ranger"
-	pushd /opt/ranger/ >/dev/null
-	git pull
-	bash ./setup.sh
-	ln -s /usr/bin/ranger ./ranger
-	popd >/dev/null
+	# HTTPSCREENSHOT:
+	if [ ! -d /opt/httpscreenshot/ ]; then
+		echo -e "\n $GREEN[+]$RESET Configuring HTTP screenshot"
+		pushd /opt/httpscreenshot/ >/dev/null
+		git pull
+		bash /opt/httpscreenshot/install-dependencies.sh
+		popd >/dev/null
+	fi
+
+else
+  echo -e ' '$RED'[!]'$RESET' Skipping gitHub ... [--visual]' 1>&2
 fi
 
 #
 # Pip installs
 #
-echo -e "\n $GREEN[+]$RESET Installing Webdav Server"
-pip install cheroot wsgidav
-
+if [ "$pip" == "true" ]; then
+	echo -e "\n $GREEN[+]$RESET Installing Webdav Server"
+	pip install cheroot wsgidav
+else
+  echo -e ' '$RED'[!]'$RESET' Skipping pip ... [--visual]' 1>&2
+fi
 #
 # reboot? # 
 #
