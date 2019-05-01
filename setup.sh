@@ -112,12 +112,12 @@ PS1="\[\033[31m\][\[\033[36m\]\u\[\033[31m\]]\[\033[31m\]\h:\[\033[33;1m\]\w\[\0
 EOF
 #fi
 	# Wallpaper ... Assuming you pulled the paper as well
-	wPaperDIR="$(dirname "$(readlink -f "$0")")/BG/"
+	wPaperDIR="$(dirname "$(readlink -f "$0")")/BG"
 	wPaper="$(ls $wPaperDIR |sort -R | egrep "png|jpg" |tail -1)"
 
-	if [ -f $wPaper ]; then
+	if [ -f "$wPaperDIR/$wPaper" ]; then
 		if [[ "$XDG_CURRENT_DESKTOP" == "GNOME" ]]; then
-			gsettings set org.gnome.desktop.background picture-uri file://${wPaperDIR}${wPaper}
+			gsettings set org.gnome.desktop.background picture-uri file://${wPaperDIR}/${wPaper}
 			gsettings set org.gnome.desktop.background picture-options "stretched"
 		fi
 		if [[ "$XDG_CURRENT_DESKTOP" == "XFCE" ]]; then
@@ -206,7 +206,7 @@ fi
 if [ "$visual" == "true" ]; then
   prettyInstall
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping visuals ... [--visual]' 1>&2
+  echo -e ' '$RED'[!]'$RESET' Skipping visual ... [--visual]' 1>&2
 fi
 
 # LEts get our tools
