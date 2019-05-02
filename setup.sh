@@ -20,6 +20,9 @@ BLUE="\033[01;34m"     # Heading
 BOLD="\033[01;01m"     # Highlight
 RESET="\033[00m"       # Normal
 
+aptLIST=()
+easyGIT=()
+
 display_usage() {
 	echo
 	echo "Usage: $0"
@@ -39,10 +42,6 @@ if [ "$#" -eq 0 ] ; then
 	display_usage
 	exit 1
 fi
-
-aptLIST=()
-# GitHub Installs #
-easyGIT=()
 
 argument=$@
 for a in $argument; do 
@@ -218,15 +217,17 @@ function gitINSTALL {
 
 # regular update
 if [ "$upgrade" == "true" ]; then
-  apt-get -y -qq upgrade
-  echo -e "\n $GREEN[+]$RESET Done with upgrade installs ..."
+	apt-get -qq update 
+	apt-get -y -qq upgrade
+	echo -e "\n $GREEN[+]$RESET Done with upgrade installs ..."
 else
   echo -e ''$RED'[!]'$RESET' Skipping apt-get upgrade ... [--upgrade]' 1>&2
 fi
 
 # Dist Upgrade
 if [ "$dist" == "true" ]; then
-  apt-get -y -qq dist-upgrade --fix-missing
+	apt-get -qq update 
+	apt-get -y -qq dist-upgrade --fix-missing
 	echo -e "\n $GREEN[+]$RESET Done with dist-upgrade ..."
 else
   echo -e ''$RED'[!]'$RESET' Skipping apt-get dist-upgrade ... [--distupgrade]' 1>&2
@@ -243,17 +244,16 @@ fi
 if [ "$aptitude" == "true" ]; then
 	# apt update
 	echo -e "\n $GREEN[+]$RESET aptitude updates ..."
-	apt-get -qq update 
-
 	# Sources
 	echo -e "\n $GREEN[+]$RESET Sublime key ..."
 	wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
 	echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
+	apt-get -qq update 
 
 	for i in ${aptLIST[@]}; do aptINSTALL $i; done
 	echo -e "\n $GREEN[+]$RESET Done with aptitude installs ..."
 else
-  echo -e ''$RED'[!]'$RESET' Skipping aptitude ... [--apt]' 1>&2
+	echo -e ''$RED'[!]'$RESET' Skipping aptitude ... [--apt]' 1>&2
 fi
 
 #
@@ -274,7 +274,6 @@ fi
 #
 # Detailed Git Configurations #
 #
-
 if [ "$gitHub" == "true" ]; then
 	for i in ${easyGIT[@]}; do gitINSTALL $i; done
 
@@ -300,7 +299,7 @@ if [ "$gitHub" == "true" ]; then
 
 	echo -e "\n $GREEN[+]$RESET Done with gitHub installs ..."
 else
-  echo -e ''$RED'[!]'$RESET' Skipping gitHub ... [--gitHub]' 1>&2
+	echo -e ''$RED'[!]'$RESET' Skipping gitHub ... [--gitHub]' 1>&2
 fi
 
 #
@@ -312,10 +311,15 @@ if [ "$pip" == "true" ]; then
 else
   echo -e ''$RED'[!]'$RESET' Skipping pip ... [--pip]' 1>&2
 fi
+
+#
+# All Done ...
+#
+echo -e "\n $GREEN[+]$RESET All Done ..."
+
 #
 # reboot? # 
 #
-echo -e "\n $GREEN[+]$RESET All Done ..."
 if [ "$reboot" == "true" ]; then
 	echo -e "\n $YELLOW[+] I need to reboot ... \n$RED"
 	read -p " [!] READY ... ? [y]es [n]o ..." -n 3 -r
