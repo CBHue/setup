@@ -2,24 +2,24 @@
 # This is a list of apt-get tools 
 # 
 apt-transport-https
-backdoor-factory
+#backdoor-factory
 chromium
 conky
 crackmapexec
-eyewitness
-freerdp-x11
+#eyewitness
+freerdp2-x11
 git
 gobuster
 libreoffice
 python3-pip
 python-pyftpdlib
-realtek-rtl88xxau-dkms
+#realtek-rtl88xxau-dkms
 responder
-shellter
+#shellter
 snapd
 sublime-text
 terminator
 unicornscan
-veil
+#veil
 virtualbox-guest-x11
 # Not sure why i need this
