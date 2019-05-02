@@ -10,11 +10,6 @@
 #
 #################################################################################################################
 
-# Optional steps
-distupgrade=false     #[ --distupgrade ]
-upgrade=false         #[ --upgrade ]
-visual=false	      #[--visual]
-
 # Where did i get this from ?
 RED="\033[01;31m"      # Issues/Errors
 GREEN="\033[01;32m"    # Success
@@ -23,70 +18,91 @@ BLUE="\033[01;34m"     # Heading
 BOLD="\033[01;01m"     # Highlight
 RESET="\033[00m"       # Normal
 
-# Apttitude installs
+display_usage() {
+	echo
+	echo "Usage: $0"
+	echo
+	echo " -h, --help   Display usage instructions"
+	echo " --upgrade : apt-get upgrade"
+	echo " --distupgrade : apt-get dist-upgrade"
+	echo " --apttitude : apt Tools"
+	echo " --snapd : snapd Tools"
+	echo " --pip : Python Tools"
+	echo " --gitHub : GitHub Tools"
+	echo
+}
+
+if [ "$#" -eq 0 ] ; then
+	display_usage
+	exit 1
+fi
+
 aptLIST=()
-apt="/opt/setup/apt.lst"
-
-if [[ -f "$apt" ]]; then
-	while IFS= read -r line 
-	do
-		if [[ $line == \#* ]]; then
-			continue
-		fi
-		aptLIST+=($line)
-	done <"$apt"
-fi
-
 # GitHub Installs #
-git="/opt/setup/git.lst"
 easyGIT=()
-if [[ -f "$git" ]]; then
-	while IFS= read -r line 
-	do
-		if [[ $line == \#* ]]; then
-			continue
-		fi
-		easyGIT+=($line)
-	done <"$git"
-fi
 
-# Read command line arguments
-for x in $( tr '[:upper:]' '[:lower:]' <<< "$@" ); do
-	if [ "${x}" == "--distupgrade" ]; then
-		distupgrade=true
-	elif [ "${x}" == "--upgrade" ]; then
-		upgrade=true
-	elif [ "${x}" == "--visual" ]; then
-		visual=true
-	elif [ "${x}" == "--apt" ]; then
-		apttitude=true
-	elif [ "${x}" == "--git" ]; then
-		gitHub=true
-	elif [ "${x}" == "--apt" ]; then
-		snapd=true
-	elif [ "${x}" == "--apt" ]; then
-		pip=true
-	elif [ "${x}" == "--help" ]; then
-		echo "--upgrade : apt-get upgrade"
-		echo "--dsitupgrade : apt-get dist-upgrade"
-		echo "--apttitude : apt Tools"
-		echo "--snapd : snapd Tools"
-		echo "--pip : Python Tools"
-		echo "--gitHub : GitHub Tools"
-		exit 1
-	else
-		echo -e ' '$RED'[!]'$RESET' Unknown option: '${x} 1>&2
-		exit 1
-	fi
+argument=$@
+for a in $argument; do 
+	case $a in
+		-h|--help)
+			display_usage
+		;;
+		-u|--upgrade)
+			echo -e  ''$GREEN'[+]'$RESET' queuing upgrade'
+			upgrade=true
+			reboot=true
+		;;
+		-d|--distupgrade)
+			echo -e  ''$GREEN'[+]'$RESET' queuing distupgrade'
+			distupgrade=true
+			reboot=true
+		;;
+		-a|--apttitude)
+			echo -e  ''$GREEN'[+]'$RESET' queuing apttitude installs'
+			apttitude=true
+			# Load apt.lst
+			apt="/opt/setup/apt.lst"
+			if [[ -f "$apt" ]]; then
+				while IFS= read -r line 
+				do
+					if [[ $line == \#* ]]; then
+						continue
+					fi
+					aptLIST+=($line)
+				done <"$apt"
+			fi
+		;;
+		-s|--snapd)
+			echo -e  ''$GREEN'[+]'$RESET' queuing snapd installs'
+			snapd=true
+		;;
+		-p|--pip)
+			echo -e  ''$GREEN'[+]'$RESET' queuing pip intsalls'
+			pip=true
+		;;
+		-g|--gitHub)
+			echo -e  ''$GREEN'[+]'$RESET' queuing gitHub'
+			gitHub=true
+			git="/opt/setup/git.lst"
+			if [[ -f "$git" ]]; then
+			while IFS= read -r line 
+			do
+				if [[ $line == \#* ]]; then
+					continue
+				fi
+				easyGIT+=($line)
+			done <"$git"
+			fi
+		;;
+		*)
+			echo -e  ''$RED'[!]'$RESET' unknown option '$a
+		;;
+	esac
 done
 
 #
 # functions
 #
-function aptINSTALL {
-	echo -e "\n $BLUE[+]$RESET Installing $1"
-	apt-get -y -qq install $1 > /dev/null
-}
 
 function prettyInstall {
 	# Lets write to some config files 
@@ -153,6 +169,11 @@ Name=Conky-left
 Comment=<optional comment>
 EOF
 
+}
+
+function aptINSTALL {
+	echo -e "\n $BLUE[+]$RESET Installing $1"
+	apt-get -y -qq install $1 > /dev/null
 }
 
 function gitINSTALL {
@@ -222,7 +243,7 @@ if [ "$apptitude" == "true" ]; then
 
 	for i in ${aptLIST[@]}; do aptINSTALL $i; done
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping Apptitude ... [--visual]' 1>&2
+  echo -e ' '$RED'[!]'$RESET' Skipping Apptitude ... [--apptitude]' 1>&2
 fi
 
 #
@@ -236,8 +257,9 @@ if [ "snapd" == "true" ]; then
 	echo -e "\n $GREEN[+]$RESET Installing powershell snap"
 	snap install powershell --classic
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping snapd ... [--visual]' 1>&2
+  echo -e ' '$RED'[!]'$RESET' Skipping snapd ... [--snapd]' 1>&2
 fi
+
 #
 # Detailed Git Configurations #
 #
@@ -266,7 +288,7 @@ if [ "$gitHub" == "true" ]; then
 	fi
 
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping gitHub ... [--visual]' 1>&2
+  echo -e ' '$RED'[!]'$RESET' Skipping gitHub ... [--gitHub]' 1>&2
 fi
 
 #
@@ -276,14 +298,16 @@ if [ "$pip" == "true" ]; then
 	echo -e "\n $GREEN[+]$RESET Installing Webdav Server"
 	pip install cheroot wsgidav
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping pip ... [--visual]' 1>&2
+  echo -e ' '$RED'[!]'$RESET' Skipping pip ... [--pip]' 1>&2
 fi
 #
 # reboot? # 
 #
 echo -e "\n $GREEN[+]$RESET All Done ..."
-echo -e "\n $YELLOW[+] I need to reboot ... \n$RED"
-read -p " [!] READY ... ? [y]es [n]o ..." -n 3 -r
-if [[ $REPLY =~ ^[Yy]$ ]]; then
- reboot
+if [ "$reboot" == "true" ]; then
+	echo -e "\n $YELLOW[+] I need to reboot ... \n$RED"
+	read -p " [!] READY ... ? [y]es [n]o ..." -n 3 -r
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+	 reboot
+	fi
 fi
