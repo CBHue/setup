@@ -2,11 +2,13 @@
 
 ################################################################################################################
 #
-# Kali no frils Setup Script
+# ubuntu no frils Setup Script
 # Pulls favorite apt and git tools
 #
 # Use this if you want to --upgrade
 # Use this if you want to --distupgrade 
+#
+# https://github.com/CBHue
 #
 #################################################################################################################
 
@@ -25,6 +27,7 @@ display_usage() {
 	echo " -h, --help   Display usage instructions"
 	echo " --upgrade : apt-get upgrade"
 	echo " --distupgrade : apt-get dist-upgrade"
+	echo " --visual : background, conky, etc"
 	echo " --apttitude : apt Tools"
 	echo " --snapd : snapd Tools"
 	echo " --pip : Python Tools"
@@ -56,6 +59,10 @@ for a in $argument; do
 			echo -e  ''$GREEN'[+]'$RESET' queuing distupgrade'
 			distupgrade=true
 			reboot=true
+		;;
+		-v|--visual)
+			echo -e  ''$GREEN'[+]'$RESET' queuing visual'
+			visual=true
 		;;
 		-a|--apttitude)
 			echo -e  ''$GREEN'[+]'$RESET' queuing apttitude installs'
