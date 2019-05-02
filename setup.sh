@@ -28,7 +28,7 @@ display_usage() {
 	echo " --upgrade : apt-get upgrade"
 	echo " --distupgrade : apt-get dist-upgrade"
 	echo " --visual : background, conky, etc"
-	echo " --apttitude : apt Tools"
+	echo " --apt : apt Tools"
 	echo " --snapd : snapd Tools"
 	echo " --pip : Python Tools"
 	echo " --gitHub : GitHub Tools"
@@ -64,9 +64,9 @@ for a in $argument; do
 			echo -e  ''$GREEN'[+]'$RESET' queuing visual'
 			visual=true
 		;;
-		-a|--apttitude)
-			echo -e  ''$GREEN'[+]'$RESET' queuing apttitude installs'
-			apttitude=true
+		-a|--apt)
+			echo -e  ''$GREEN'[+]'$RESET' queuing aptitude installs'
+			aptitude=true
 			# Load apt.lst
 			apt="/opt/setup/apt.lst"
 			if [[ -f "$apt" ]]; then
@@ -238,9 +238,9 @@ else
 fi
 
 # LEts get our tools
-if [ "$apptitude" == "true" ]; then
+if [ "$aptitude" == "true" ]; then
 	# apt update
-	echo -e "\n $GREEN[+]$RESET Apptitude updates ..."
+	echo -e "\n $GREEN[+]$RESET aptitude updates ..."
 	apt-get -qq update 
 
 	# Sources
@@ -250,7 +250,7 @@ if [ "$apptitude" == "true" ]; then
 
 	for i in ${aptLIST[@]}; do aptINSTALL $i; done
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping Apptitude ... [--apptitude]' 1>&2
+  echo -e ' '$RED'[!]'$RESET' Skipping aptitude ... [--aptitude]' 1>&2
 fi
 
 #
