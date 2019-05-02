@@ -220,21 +220,21 @@ function gitINSTALL {
 if [ "$upgrade" == "true" ]; then
   apt-get -y -qq upgrade
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping apt-get upgrade ... [--upgrade]' 1>&2
+  echo -e ''$RED'[!]'$RESET' Skipping apt-get upgrade ... [--upgrade]' 1>&2
 fi
 
 # Dist Upgrade
 if [ "$dist" == "true" ]; then
   apt-get -y -qq dist-upgrade --fix-missing
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping apt-get dist-upgrade ... [--distupgrade]' 1>&2
+  echo -e ''$RED'[!]'$RESET' Skipping apt-get dist-upgrade ... [--distupgrade]' 1>&2
 fi
 
 # install background?
 if [ "$visual" == "true" ]; then
   prettyInstall
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping visual ... [--visual]' 1>&2
+  echo -e ''$RED'[!]'$RESET' Skipping visual ... [--visual]' 1>&2
 fi
 
 # LEts get our tools
@@ -250,7 +250,7 @@ if [ "$aptitude" == "true" ]; then
 
 	for i in ${aptLIST[@]}; do aptINSTALL $i; done
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping aptitude ... [--aptitude]' 1>&2
+  echo -e ''$RED'[!]'$RESET' Skipping aptitude ... [--apt]' 1>&2
 fi
 
 #
@@ -264,7 +264,7 @@ if [ "snapd" == "true" ]; then
 	echo -e "\n $GREEN[+]$RESET Installing powershell snap"
 	snap install powershell --classic
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping snapd ... [--snapd]' 1>&2
+  echo -e ''$RED'[!]'$RESET' Skipping snapd ... [--snapd]' 1>&2
 fi
 
 #
@@ -295,7 +295,7 @@ if [ "$gitHub" == "true" ]; then
 	fi
 
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping gitHub ... [--gitHub]' 1>&2
+  echo -e ''$RED'[!]'$RESET' Skipping gitHub ... [--gitHub]' 1>&2
 fi
 
 #
@@ -305,7 +305,7 @@ if [ "$pip" == "true" ]; then
 	echo -e "\n $GREEN[+]$RESET Installing Webdav Server"
 	pip install cheroot wsgidav
 else
-  echo -e ' '$RED'[!]'$RESET' Skipping pip ... [--pip]' 1>&2
+  echo -e ''$RED'[!]'$RESET' Skipping pip ... [--pip]' 1>&2
 fi
 #
 # reboot? # 
