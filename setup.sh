@@ -219,6 +219,7 @@ function gitINSTALL {
 # regular update
 if [ "$upgrade" == "true" ]; then
   apt-get -y -qq upgrade
+  echo -e "\n $GREEN[+]$RESET Done with upgrade installs ..."
 else
   echo -e ''$RED'[!]'$RESET' Skipping apt-get upgrade ... [--upgrade]' 1>&2
 fi
@@ -226,6 +227,7 @@ fi
 # Dist Upgrade
 if [ "$dist" == "true" ]; then
   apt-get -y -qq dist-upgrade --fix-missing
+	echo -e "\n $GREEN[+]$RESET Done with dist-upgrade ..."
 else
   echo -e ''$RED'[!]'$RESET' Skipping apt-get dist-upgrade ... [--distupgrade]' 1>&2
 fi
@@ -249,6 +251,7 @@ if [ "$aptitude" == "true" ]; then
 	echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
 
 	for i in ${aptLIST[@]}; do aptINSTALL $i; done
+	echo -e "\n $GREEN[+]$RESET Done with aptitude installs ..."
 else
   echo -e ''$RED'[!]'$RESET' Skipping aptitude ... [--apt]' 1>&2
 fi
@@ -263,6 +266,7 @@ if [ "snapd" == "true" ]; then
 
 	echo -e "\n $GREEN[+]$RESET Installing powershell snap"
 	snap install powershell --classic
+	echo -e "\n $GREEN[+]$RESET Done with snap installs ..."
 else
   echo -e ''$RED'[!]'$RESET' Skipping snapd ... [--snapd]' 1>&2
 fi
@@ -294,6 +298,7 @@ if [ "$gitHub" == "true" ]; then
 		popd >/dev/null
 	fi
 
+	echo -e "\n $GREEN[+]$RESET Done with gitHub installs ..."
 else
   echo -e ''$RED'[!]'$RESET' Skipping gitHub ... [--gitHub]' 1>&2
 fi
