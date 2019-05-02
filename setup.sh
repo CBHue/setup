@@ -218,7 +218,7 @@ function gitINSTALL {
 # regular update
 if [ "$upgrade" == "true" ]; then
 	apt-get -qq update 
-	apt-get -y -qq upgrade
+	apt-get -y --quiet upgrade
 	echo -e "\n $GREEN[+]$RESET Done with upgrade installs ..."
 else
   echo -e ''$RED'[!]'$RESET' Skipping apt-get upgrade ... [--upgrade]' 1>&2
@@ -227,7 +227,7 @@ fi
 # Dist Upgrade
 if [ "$dist" == "true" ]; then
 	apt-get -qq update 
-	apt-get -y -qq dist-upgrade --fix-missing
+	apt-get -y --quiet dist-upgrade --fix-missing
 	echo -e "\n $GREEN[+]$RESET Done with dist-upgrade ..."
 else
   echo -e ''$RED'[!]'$RESET' Skipping apt-get dist-upgrade ... [--distupgrade]' 1>&2
@@ -242,12 +242,13 @@ fi
 
 # LEts get our tools
 if [ "$aptitude" == "true" ]; then
-	# apt update
+
 	echo -e "\n $GREEN[+]$RESET aptitude updates ..."
 	# Sources
 	echo -e "\n $GREEN[+]$RESET Sublime key ..."
 	wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | apt-key add -
 	echo "deb https://download.sublimetext.com/ apt/stable/" | tee /etc/apt/sources.list.d/sublime-text.list
+	# apt update	
 	apt-get -qq update 
 
 	for i in ${aptLIST[@]}; do aptINSTALL $i; done
@@ -259,13 +260,15 @@ fi
 #
 # snapd installs
 #
-if [ "snapd" == "true" ]; then
+if [ "$snapd" == "true" ]; then
 	echo -e "\n $GREEN[+]$RESET Configuring snap"
 	systemctl enable snapd.service
 	systemctl start snapd.service
 
 	echo -e "\n $GREEN[+]$RESET Installing powershell snap"
 	snap install powershell --classic
+	echo -e "\n $GREEN[+]$RESET Installing golang-go snap"
+	snap install go --classic
 	echo -e "\n $GREEN[+]$RESET Done with snap installs ..."
 else
   echo -e ''$RED'[!]'$RESET' Skipping snapd ... [--snapd]' 1>&2
