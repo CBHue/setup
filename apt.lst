@@ -8,9 +8,11 @@ conky
 crackmapexec
 #eyewitness
 freerdp2-x11
+ftp
 git
 gobuster
 libreoffice
+nfs-common
 python3-pip
 python-pyftpdlib
 #realtek-rtl88xxau-dkms
