@@ -36,6 +36,11 @@ display_usage() {
 	echo " --pip : Python Tools"
 	echo " --gitHub : GitHub Tools"
 	echo
+	echo " Install all Tools"
+	echo " -----------------"
+	echo " $0 --visual --apt --snapd --pip --gitHub"
+	echo " $0 --upgrade --visual --apt --snapd --pip --gitHub"
+	echo
 }
 
 if [ "$#" -eq 0 ] ; then
