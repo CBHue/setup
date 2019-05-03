@@ -132,6 +132,7 @@ alias soapui="/opt/SoapUI-5.2.1/bin/soapui.sh 2>/dev/null &"
 alias pubIP="dig +short myip.opendns.com @resolver1.opendns.com"
 alias src="source ~/.bashrc"
 alias msfc="service postgresql start; msfconsole"
+alias sublMerge="smerge . &"
 
 # Were going to override the promt ... Should be done in profile ... but oh well
 PS1="\[\033[31m\][\[\033[36m\]\u\[\033[31m\]]\[\033[31m\]\h:\[\033[33;1m\]\w\[\033[m\] : "
