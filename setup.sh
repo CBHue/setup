@@ -282,6 +282,11 @@ if [ "$snapd" == "true" ]; then
 	snap install powershell --classic
 	echo -e "\n $GREEN[+]$RESET Installing golang-go snap"
 	snap install go --classic
+	
+	echo 'export GOROOT=/snap/go/current/bin' >> $HOME/.bash_aliases
+	echo 'export GOPATH=$HOME/go' >> $HOME/.bash_aliases
+	echo 'export PATH=$PATH:$GOROOT:$GOPATH' >> $HOME/.bash_aliases
+	
 	echo -e "\n $GREEN[+]$RESET Done with snap installs ..."
 else
   echo -e ''$RED'[!]'$RESET' Skipping snapd ... [--snapd]' 1>&2
