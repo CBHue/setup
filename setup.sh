@@ -276,7 +276,9 @@ if [ "$snapd" == "true" ]; then
 	echo -e "\n $GREEN[+]$RESET Configuring snap"
 	systemctl enable snapd.service
 	systemctl start snapd.service
-
+	
+	sleep 2
+	
 	echo -e "\n $GREEN[+]$RESET Installing powershell snap"
 	snap install powershell --classic
 	echo -e "\n $GREEN[+]$RESET Installing golang-go snap"
